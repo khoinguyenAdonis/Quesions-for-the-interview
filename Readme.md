@@ -1,5 +1,6 @@
 ## Câu hỏi ôn tập C-C++ 
-
+<details> 
+<summary><h2> Các câu hỏi thường gặp trong C/C++<h2></summary>
 <details>
     <summary><h3>⭐Tại sao lại sử dụng ngôn ngữ C<h3></summary>
     
@@ -115,6 +116,29 @@ Stack có bộ nhớ rất thấp tùy thuộc vào kiến trúc hệ điều h�
 </details>
 
 <details>
-    <summary><h3>⭐ <h3></summary>
+    <summary><h3>⭐ Cấu trúc dữ liệu tree<h3></summary>
 
+- Là một kiểu cấu trúc phân cấp trong đó mỗi phần tử(node) có thể có nhiều phần tử con Một số loại cây phổ biến 
+
+Binary tree(cây nhị phân) : mỗi note có tối đa 2 phần tử con  
+binary search tree cây nhị phân có tính chất đặt biệt. Với mỗi node, tất cả các giá trị bên trái nhỏ hơn node và các giá trị bên phải lớn hơn node 
+B-tree : được dùng trong nhiều hệ thống tệp
+AVL-tree Cây Bts có thêm tập tính cân bằng để đảm bảo hiệu xuất tốt khi tìm kiếm.  
+</details>
+
+<details>
+    <summary><h3>⭐ Khái niệm binary tree<h3></summary>
+
+-> cấu trúc dữ liệu dạng cây mỗi node có tối đa 2 node con một bên trái 1 bên phải , có 1 node root từ đó các node con được xây dựng dựa trên node root. 
+-> Có thể rỗng, tức là không có node nào. 
+
+</details>
+
+<details>
+<summary><h3>⭐Sự khác biệt của delete và delete [] trong c++<h3></summary>
+
+-> cả 2 đều được dùng để giải phóng bộ nhớ của một đối tượng được cấp phát bằng new.
+->> delete : giải phóng một đối tượng được cấp phát bằng new.
+->> delete[] : giải phóng một mảng đối tưởng cấp phát bằng new[].
+</details>
 </details>
