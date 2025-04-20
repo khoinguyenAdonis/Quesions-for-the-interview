@@ -170,6 +170,7 @@ AVL-tree Cây Bts có thêm tập tính cân bằng để đảm bảo hiệu xu
 
 -> là 1 contructor đặt biệt để tạo 1 đối tương mới bằng cách sao chep giá trị của 1 obj hiện có. nó được dùng nếu bạn muốn đảm bảo quá trình copy 1 cách chính xác và và kiểm soát được hành vi sao chep. 
 ->> Tham số truyền vào là 1 tham chiếu hằng đến 1 obj 
+->> copy là 1 khái niệm và deep copy hay shallow là 1 quá trình thực hiện 
 
 ```c++
 class obj1 {
@@ -224,9 +225,11 @@ int main (void){
 class obj1 {
     public:
     int* x ;
-    obj1(int a) : x(a){}
+    obj1(int a) {
+        x = new int (a);
+    }
     obj1(const obj1 &a){
-        x =new int(a.x);
+        x =a.x;
     }
 };
 
@@ -238,8 +241,87 @@ int main (void){
 }
 ```
 </details>
+<summary><h4>=>> Deep copy  <h4></summary>
 
+-> là cách sao chép mà các đối tượng bằng cachs nhân bản hoàn toàn và nó đều đọc lập và không chia sẽ vùng nhớ với đối tượng gốc.
+```c++
+class obj1 {
+    public:
+    int* x ;
+    obj1(int a) {
+        x = new int (a);
+    }
+    obj1(const obj1 &a){
+        x =new int (*a.x);
+    }
+};
+
+int main (void){
+    obj1 my_1(2);
+    obj1 my_2 = my_1;
+    my_1.x ; /// 2
+    my_2.x ; /// 2
+    *my_2.x =3;
+    my_1.x ; /// 2
+    my_2.x ; /// 3  
+}
+```
 
 </details>
+<details>
+<summary><h4>=>> Friend  <h4></summary>
 
+-> dungf để khai báo một hàm hoặc 1 class là bạn bè của 1 class khác khi 1 hàm hoặc 1 class đuocwj khai báo friend nó có quyền truy cập vào các thành viên (private) or protected mặc dù theo mặc định thì các hàm này chỉ cps thể truy cập từ bên trong class.
+```c++
+class myObj{
+    private : 
+    int x;
+    public :
+    myObj(int a) : x(a){}
+
+    friend void display (const myObj &obj);
+}
+
+void display (const myObj &obj){
+    printf("%d", obj.x);
+}
+
+int main (){
+    myObj o1(1);
+    display(o1); // 1
+    return 0;
+}
+/////////////////
+class myObj{
+    private : 
+    int x;
+    public :
+    myObj(int a) : x(a){}
+
+    friend class B;
+}
+class B{
+    public:
+    void display (const myObj &obj){
+    printf("%d", obj.x);
+}
+}
+
+int main (){
+    myObj o1(1);
+    B o2;
+    o2.display(o1); // 1
+    return 0;
+}
+```
+</details>
+<details>
+<summary><h4>=>> this pointer <h4></summary>
+
+-> COn tror this được sử dụng bên trong class giúp tham chiếu đến đối tượng hiện tại đang goi thành viên của class. 
+
+->> Chỉ dùng bên trong class luôn trỏ đến đối tượng hiện tại tức là đối tượng mà phương thức đó đang gọi giúp tham chiếu đến chính đối tượng hiện tại đâg gọi thành viên của class. Hữu ích khi có sự trùng lập giữa biến và tham số giúp phân biệt rõ ràng hơn
+
+</details>
+</details>
 </details>
