@@ -135,10 +135,111 @@ AVL-tree Cây Bts có thêm tập tính cân bằng để đảm bảo hiệu xu
 </details>
 
 <details>
-<summary><h3>⭐Sự khác biệt của delete và delete [] trong c++<h3></summary>
+<summary><h3>⭐ Sự khác biệt của delete và delete [] trong c++<h3></summary>
 
 -> cả 2 đều được dùng để giải phóng bộ nhớ của một đối tượng được cấp phát bằng new.
 ->> delete : giải phóng một đối tượng được cấp phát bằng new.
 ->> delete[] : giải phóng một mảng đối tưởng cấp phát bằng new[].
 </details>
+
+<details>
+<summary><h3>⭐  <h3></summary>
+</details>
+</details>
+
+<details>
+<summary><h2> C++ <h2></summary>
+
+<details>
+<summary><h3>mdi-home  Class and Object<h3></summary>
+
+-> Class là gì :  class là một kiểu cấu trúc dữ liệu trong c++ do người dùng tự định nghĩa dùng để mô tả các thuộc tính và phương thức. class là một khuôn mẫu sẽ không tốn bộ nhớ ram cho đến khi được dùng để khởi tạo.
+-> object là gì : là 1 đối tượng được khai báo tư class và nó sẽ chiếm một vùng nhớ cụ thể trên ram để lưu trữ dữ liệu và cung cấp các phương thức của class.
+
+<details>
+<summary><h4>=>> Constructor and destructor <h4></summary>
+-> Constructor là gì : Constructor là 1 phương thức đặt biệt, được gọi khi khởi tạo object. mục đích là khởi tạo giá trị ban đầu cho obj. 
+->> Đặc điểm : có trùng tên với class và không có kiểu trả về kể cả kiểu void, có thể overload được với các parameter khác nhau.
+
+-> Destructor  là gì : ngược lại với destructor là 1 phương thức được gọi tự động khi object ra khỏi phạm vi hoạt động hoặc bị giải phóng.
+->> Đặc điểm : giống tên class nhưng có dấu ngã và kcos tham số và k overload.
+
+</details>
+<details>
+<summary><h4>=>> Copy constructor<h4></summary>
+
+-> là 1 contructor đặt biệt để tạo 1 đối tương mới bằng cách sao chep giá trị của 1 obj hiện có. nó được dùng nếu bạn muốn đảm bảo quá trình copy 1 cách chính xác và và kiểm soát được hành vi sao chep. 
+->> Tham số truyền vào là 1 tham chiếu hằng đến 1 obj 
+
+```c++
+class obj1 {
+    public:
+    int x ;
+    obj1(int a) : x(a){}
+    obj1(const obj1 &a){
+        x = a.x;
+    }
+};
+
+int main(void){
+    obj1 myObj(2);
+    obj1 my_2 = myObj;
+    printf("%d",my_2.x); // => out 2
+    return 0;
+}
+```
+</details>
+<details>
+<summary><h4>=>> Move constructor <h4></summary>
+
+-> Move constructor la gi : là 1 constructỏ đặc biệt thay vì sao chép lại nó sẽ lấy giá trị của 1 obj sẵn có và đặt giá trị của obj có sẵn về trạng thái hợp lệ nhưng rỗng (con trỏ của đối tượng cũng sẽ là con trỏ null pointer) 
+
+-> ứng dụng: khi làm việc với dữ liệu lớn(như mảng hay danh sách hoặc đối tượng có vùng nhớ động) thì giúp giảm tài nguyên và tối ưu chi phí. đảm bảo thao tác nhanh chống mà không tạo ra bản sao.
+
+```c++
+class obj1 {
+    public:
+    int* x ;
+    obj1(int a) : x(a){}
+    obj1(obj1 &&a){
+        x =new int(a.x);
+    }
+};
+
+int main (void){
+    obj1 my_1(2);
+    obj1 my_2 = std::move(my_1);
+    my_1.x ; /// khong co gi
+    my_2.x ; /// 2
+}
+```
+</details>
+
+<details>
+<summary><h4>=>> Shallow copy <h4></summary>
+
+-> tạo bản sao chứa tham chiếu hoặc con trỏ đến dữ liệu góc thay vì sao chép toàn bộ. vì vậy khi thay đổi giá trị thì đối tượng gốc cũng bị ảnh hưởng. do cùng tham chiếu đến 1 địa chỉ.
+-> lưu ý shallow copy có thể gây lỗi , đặt biệt trong trường hợp giải phóng bộ nhớ. con trỏ obj còn lại sẽ bị tình trạng con trỏ lơ lửng.
+```c++
+class obj1 {
+    public:
+    int* x ;
+    obj1(int a) : x(a){}
+    obj1(const obj1 &a){
+        x =new int(a.x);
+    }
+};
+
+int main (void){
+    obj1 my_1(2);
+    obj1 my_2 = my_1;
+    my_1.x ; /// 2
+    my_2.x ; /// 2
+}
+```
+</details>
+
+
+</details>
+
 </details>
