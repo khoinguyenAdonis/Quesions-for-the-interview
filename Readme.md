@@ -1,6 +1,6 @@
 ## Câu hỏi ôn tập C-C++ 
 <details> 
-<summary><h2> Các câu hỏi thường gặp trong C/C++<h2></summary>
+<summary><h2> ❓ Các câu hỏi thường gặp trong C/C++<h2></summary>
 <details>
     <summary><h3>⭐Tại sao lại sử dụng ngôn ngữ C<h3></summary>
     
@@ -13,7 +13,6 @@ C có nhiều ưu điểm chẳng hạn như : về mặc tốc độ, tính lin
 C là ngôn ngữ cơ sở nền tảng cho nhiều ngôn ngữ khác, trong đó bao gồm c++, vì vậy c và c++ có nhiều điểm khác biệt nhau. C theo hướng thủ tục còn c++ hướng đối tượng. 
     
 Hướng thủ tục là c chia nhỏ chương trình thành các hàm và hoạt động theo trình tự nhất định. C được trình bài theo hướng tuyến tính thông qua các hàm không có khái niệm lớp hay đối tượng như c++. các hàm của C thì hoạt động độc lập và không có khái niệm đóng gói hay kế thừa như c++.
-
 Về biến thì các biến toàn cục và cục bộ được dùng để chia sẽ dữ liệu giữa giữa các hàm nhưng không có khả năng ẩn nó bên trong 1 đối tuọng .
 
 Quy trình thực thi: thì C thực thi từ trên xuống dưới theo thứ tự, Không có khả năng Đa hình nay nạp chồng 1 cách linh hoạt như c++.
@@ -148,16 +147,16 @@ AVL-tree Cây Bts có thêm tập tính cân bằng để đảm bảo hiệu xu
 </details>
 
 <details>
-<summary><h2> C++ <h2></summary>
+<summary><h2>☑️ C++ <h2></summary>
 
 <details>
-<summary><h3>mdi-home  Class and Object<h3></summary>
+<summary><h3>🌏 Class and Object<h3></summary>
 
 -> Class là gì :  class là một kiểu cấu trúc dữ liệu trong c++ do người dùng tự định nghĩa dùng để mô tả các thuộc tính và phương thức. class là một khuôn mẫu sẽ không tốn bộ nhớ ram cho đến khi được dùng để khởi tạo.
 -> object là gì : là 1 đối tượng được khai báo tư class và nó sẽ chiếm một vùng nhớ cụ thể trên ram để lưu trữ dữ liệu và cung cấp các phương thức của class.
 
 <details>
-<summary><h4>=>> Constructor and destructor <h4></summary>
+<summary><h4>💙 Constructor and destructor <h4></summary>
 -> Constructor là gì : Constructor là 1 phương thức đặt biệt, được gọi khi khởi tạo object. mục đích là khởi tạo giá trị ban đầu cho obj. 
 ->> Đặc điểm : có trùng tên với class và không có kiểu trả về kể cả kiểu void, có thể overload được với các parameter khác nhau.
 
@@ -166,7 +165,7 @@ AVL-tree Cây Bts có thêm tập tính cân bằng để đảm bảo hiệu xu
 
 </details>
 <details>
-<summary><h4>=>> Copy constructor<h4></summary>
+<summary><h4>💙 Copy constructor<h4></summary>
 
 -> là 1 contructor đặt biệt để tạo 1 đối tương mới bằng cách sao chep giá trị của 1 obj hiện có. nó được dùng nếu bạn muốn đảm bảo quá trình copy 1 cách chính xác và và kiểm soát được hành vi sao chep. 
 ->> Tham số truyền vào là 1 tham chiếu hằng đến 1 obj 
@@ -191,7 +190,7 @@ int main(void){
 ```
 </details>
 <details>
-<summary><h4>=>> Move constructor <h4></summary>
+<summary><h4>💙 Move constructor <h4></summary>
 
 -> Move constructor la gi : là 1 constructỏ đặc biệt thay vì sao chép lại nó sẽ lấy giá trị của 1 obj sẵn có và đặt giá trị của obj có sẵn về trạng thái hợp lệ nhưng rỗng (con trỏ của đối tượng cũng sẽ là con trỏ null pointer) 
 
@@ -217,7 +216,7 @@ int main (void){
 </details>
 
 <details>
-<summary><h4>=>> Shallow copy <h4></summary>
+<summary><h4>💙 Shallow copy <h4></summary>
 
 -> tạo bản sao chứa tham chiếu hoặc con trỏ đến dữ liệu góc thay vì sao chép toàn bộ. vì vậy khi thay đổi giá trị thì đối tượng gốc cũng bị ảnh hưởng. do cùng tham chiếu đến 1 địa chỉ.
 -> lưu ý shallow copy có thể gây lỗi , đặt biệt trong trường hợp giải phóng bộ nhớ. con trỏ obj còn lại sẽ bị tình trạng con trỏ lơ lửng.
@@ -241,7 +240,8 @@ int main (void){
 }
 ```
 </details>
-<summary><h4>=>> Deep copy  <h4></summary>
+<details>
+<summary><h4>💙 Deep copy  <h4></summary>
 
 -> là cách sao chép mà các đối tượng bằng cachs nhân bản hoàn toàn và nó đều đọc lập và không chia sẽ vùng nhớ với đối tượng gốc.
 ```c++
@@ -269,7 +269,7 @@ int main (void){
 
 </details>
 <details>
-<summary><h4>=>> Friend  <h4></summary>
+<summary><h4>💙 Friend  <h4></summary>
 
 -> dungf để khai báo một hàm hoặc 1 class là bạn bè của 1 class khác khi 1 hàm hoặc 1 class đuocwj khai báo friend nó có quyền truy cập vào các thành viên (private) or protected mặc dù theo mặc định thì các hàm này chỉ cps thể truy cập từ bên trong class.
 ```c++
@@ -316,7 +316,7 @@ int main (){
 ```
 </details>
 <details>
-<summary><h4>=>> this pointer <h4></summary>
+<summary><h4>💙 this pointer <h4></summary>
 
 -> COn tror this được sử dụng bên trong class giúp tham chiếu đến đối tượng hiện tại đang goi thành viên của class. 
 
@@ -324,4 +324,104 @@ int main (){
 
 </details>
 </details>
+
+<details>
+<summary><h3>🌏 Overloading <h3></summary>
+
+- Overloading là gì : là một kỹ thuật trong c++ cho phép nạp chồng các hàm toán tử có tên trùng nhau nhưng có các chức năng khác nhau, dựa vào số lượng hoặc kiểu tham số mà ta cung cấp. overloading giúp cho mã nguồn linh hoạt và dễ đọc hơn
+
+- lưu ý khi dùng không thể overload :: .* . . hai hàm chỉ dựa trên kiểu trả về
+
+- overloading  function : sử dụng 1 tên hàm cho nhiều chức năng dựa vào tham số truyền vào.
+- operator overloading : mở rộng chức năng của toán tử để làm việc với kiểu dữ liệu tùy chỉnh.
+
+<details>
+<summary><h4>💙 copy <h4></summary>
+
+- Khi operator overloading = kiểm soát đối tuongjw được gán từ đối tượng khác
+
+- Toán tử này nó khác với copy constructor nó chỉ được gọi khi cả 2 đã tồn tại 
+
+```c++
+class my_obj{
+    private :
+        int * data;
+    public :
+        my_obj(int a){
+            data = new int(a);
+        }
+        my_obj& operator=(const my_obj& obj){
+            if (this != &obj){
+                delete data;
+                *(this->data) = new(*obj.data);
+            }
+            return *this;
+        }
+};
+
+int main void {
+    my_obj o1(12);
+    my_obj o2(1);
+    o2 = o1;
+    // o2.data =12
+}
+
+```
+</details>
+<details>
+<summary><h4>💙 Move <h4></summary>
+
+tương tự như move constructor thì move operator cũng là duy chuyển dữ liệu từ đối tượng này sang đối tượng khác và đưa dữ liệu của đối tưởng củ thành rỗng . chỉ khác là nó chỉ áp dụng cho 2 đối tượng đã tạo rồi. 
+
+```c++
+class my_obj{
+    private :
+        int * data;
+    public :
+        my_obj(int a){
+            data = new int(a);
+        }
+        my_obj& operator=(const my_obj& obj){
+            if (this != &obj){
+                delete data;
+                *(this->data) = new(*obj.data);
+                obj.data = nullptr; 
+            }
+            return *this;
+        }
+};
+
+int main void {
+    my_obj o1(12);
+    my_obj o2(1);
+    o2 = std::move(o1);
+    // o2.data =12
+    // o1.data = null
+}
+
+```
+</details>
+
+<details>
+<summary><h4>💙 member function <h4></summary>
+
+- khi overloading member function thì các member đó có thể cùng trong 1 class cùng tên với nhau nhưg sẽ khác các parameter 
+</details>
+
+</details>
+
+<details>
+<summary><h3>🌏 Inheritance <h3></summary>
+
+- Inheritance là gì : Cho phép các lớp con kế thừa các thuộc tính và phương thức của lớp khác. Mục đích là giảm thiểu mã nguồn tái sữ dụng lại mã.
+
+- public Inheritance : lớp con kế thừa các thành phần của lớp cha và đặt nó ở trạng public bên lớp con. các trạng thái protected được kế thưa nhưng sẽ vẫn ở trạng thái protected và chỉ có thể truy cập bằng các phương thức được cup cấp ở lớp con.Đối vói private khi kế thừa thì lớp con vẫn có nhưng các thành phần này phải được gọi từ public tại lớp cha khai báo và lớp con kế thừa.
+
+- protected Inheritance : lớp con kế thừa và đặt các kế thừa ở trạng thái protected tức là không thể gọi bên ngoài nhưng có thể gọi thông qua các method mà lớp con cung cấp và có thể kế thừa cho các lớp con tiếp theo.
+
+- private Inheritance : Lớp con kế thừa và đặt tất cả các thuộc tính về pravite. thành viên private của lớp cha vẫn phải gọi qua phương thức được khai báo ở lớp cha. còn các thành viên ở protected or public vẫn có thể truy cập qua phương thức của lớp con. nhưng các kế thừa sau sẽ phải được gọi qua phương thức của lớp lớn hơn.
+
+
+</details>
+
 </details>
