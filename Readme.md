@@ -541,6 +541,12 @@ int main(void){
 <details>
 <summary><h4>💙 Abstract <h4></summary>
 
+- Đươc sử dụng để định nghĩa 1 khung chung hoặc giao diện cho các lớp dẫn suất. Nó k được sử dụng trực tiếp mà được khai báo qua các lớp con.
+
+- Note : các lớp kế thừa phải khai báo nó không thì chính lớp đó cũng thành 1 abstract . Nên có các virtual destructor để đảm bảo được hủy đúng cách.
+
+- lợi ích là nó tanwng tính linh hoạt và khả năng mở rộng. các lớp mới dễ dàng kế thừa và triển khai mà không cần thay đổi mã nguồn hiện tại. Hổ trợ đa hình giúp các đối tượng khác nhau có thể xử lý thông qua 1 giao diện chung.
+
 </details>
 
 
