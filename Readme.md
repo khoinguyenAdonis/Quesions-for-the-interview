@@ -477,7 +477,74 @@ Khi lớp cha không có constructor mặc định và lớp con không gọi t�
 </details>
 
 </details>
+
 <details>
 <summary><h3>🌏 Polymorphism  <h3></summary>
+
+- là tính đa hình trong lập trình hướng đối tượng cho phép 1 đối tượng có thể biểu diễn theo nhiều thuộc tính khác nhau giúp tăng tính linh hoạt mở rộng trong thiết kế chương trình.
+
+- có 2 loại đa hình : 
+    
+    compiler-time polymorphims : đây là loại đa hình quyết định cách thức hoạt động  của đối tượng tại thời điểm biên dịch chương trình.
+
+    runtime polymorphism : quyết đinh cách thức tại thời điểm chạy. DDuocj thực hiện thông qua kế thừa hoặc hàm ảo hóa(virtual function)
+
+<details>
+<summary><h4>💙 Virtual <h4></summary>
+
+- là 1 method trong lớp base được thiết kế để có thể ghi đè bởi các lớp dẫn xuất, cho phép thực hiện runtime-polymorphism. 
+
+- khi 1 phương thức được khai báo virtual điều này có nghĩa là lớp dẫn xuất có thể overide lại cùng tên cùng tham số 
+
+- c++ tạo 1 bảng đặt biệt Vtable chứa các con trỏ đến các phương thức tương ứng của đối tượng thay vì phương thức của lớp cơ sở. tại thời gian chạy con trỏ được sử dụng đê truy cập đến phương thức thực tế của đối tượng. 
+
+- Dùng chung virtual cùng với destructor trong kế thừa đảm bảo destructor của lớp cơ sở được gọi một cách chuẩn sat ví dụ như trong trường hợp dùng con trỏ lớp cơ sở để quản lý đối tượng của lớp dẫn suất mà không dùng virtual thì khi chúng ra giải phóng con trỏ chỉ giải phòng vùng nhớ của lớp cơ sở lớp dẫn xuất k được gọi destructor đúng cách.
+
+vd : khi dùng chung với virtual destructor
+
+```c++
+class base{
+    private :
+        int a
+    public : 
+        base(int a) : this->a(a){}
+        virtual ~base(){
+            cout << "Base destructor called" << endl;
+        };
+};
+
+class derived : public base {
+    private:
+    int* data;
+
+public:
+    derived() {
+        data = new int[100]; // Cấp phát vùng nhớ
+        cout << "Derived constructor called" << endl;
+    }
+
+    ~derived() { // Destructor của lớp dẫn xuất
+        delete[] data; // Giải phóng vùng nhớ
+        cout << "Derived destructor called" << endl;
+    }
+};
+
+int main(void){
+    base *obj = new derived();
+    delete obj;
+}
+```
+
+    output : Derived destructor called
+             Base destructor called
+
+<details>
+<summary><h4>💙 Abstract <h4></summary>
+
+</details>
+
+
+</details>
+
 </details>
 </details>
