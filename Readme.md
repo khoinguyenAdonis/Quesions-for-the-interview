@@ -442,6 +442,42 @@ class child : public parent {
 ```
 
 </details>
+
+<details>
+<summary><h4>💙 Copy and move <h4></summary>
+
+Copy hoặc Move Constructor trong Kế thừa:
+
+Copy/Move Constructor không chỉ ở lớp con mà còn ở lớp cha:
+
+Khi lớp con có copy constructor hoặc move constructor, lớp con phải tường minh gọi copy hoặc move constructor của lớp cha.
+
+Nếu không gọi tường minh, copy/move constructor mặc định của lớp cha (nếu có) sẽ được gọi tự động.
+
+Constructor mặc định và Constructor đặc biệt:
+
+C++ sẽ tự động tạo constructor mặc định (default constructor), copy constructor mặc định, hoặc move constructor mặc định cho lớp, nhưng:
+
+Chỉ khi lớp không khai báo bất kỳ constructor nào.
+
+Nếu lớp có các trường hợp đặc biệt như con trỏ hoặc quản lý vùng nhớ động, và không định nghĩa copy/move constructor tường minh, các constructor mặc định có thể không được tạo, dẫn đến lỗi biên dịch hoặc lỗi khi chạy chương trình (runtime).
+
+Khi đã khai báo constructor bất kỳ:
+
+Nếu một lớp đã khai báo constructor (ví dụ, constructor có tham số), C++ sẽ không tạo constructor mặc định hoặc copy/move constructor mặc định.
+
+Điều này là do C++ coi rằng lập trình viên muốn tự kiểm soát cách đối tượng được khởi tạo.
+
+Khi lớp cha chỉ có constructor tham số, mà lớp con không gọi tường minh copy/move constructor của lớp cha, điều này sẽ gây lỗi biên dịch.
+
+Hậu quả khi không gọi tường minh trong kế thừa:
+
+Khi lớp cha không có constructor mặc định và lớp con không gọi tường minh copy/move constructor của lớp cha, chương trình không thể biên dịch được do thiếu cách khởi tạo phù hợp cho lớp cha.
+
 </details>
 
+</details>
+<details>
+<summary><h3>🌏 Polymorphism  <h3></summary>
+</details>
 </details>
