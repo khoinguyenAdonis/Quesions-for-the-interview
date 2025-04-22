@@ -421,7 +421,27 @@ int main void {
 
 - private Inheritance : Lớp con kế thừa và đặt tất cả các thuộc tính về pravite. thành viên private của lớp cha vẫn phải gọi qua phương thức được khai báo ở lớp cha. còn các thành viên ở protected or public vẫn có thể truy cập qua phương thức của lớp con. nhưng các kế thừa sau sẽ phải được gọi qua phương thức của lớp lớn hơn.
 
+<details>
+<summary><h4>💙 Constructor and destructor <h4></summary>
 
+- Khi lóp con được khởi tạo thì nó sẽ gọi constructor của lớp cha trước. nếu lớp cha không có constructor thì chương trinhf sẽ tạo 1 constructor cho lớp lớp đó. nếu lớp cha k khai báo constructor defaul mà khai báo constructor có tham số cài đặ thì lớp con phải gọi tường minh trước VD:
+```c++
+class parent {
+    private : 
+        int data;
+    public :
+        parent(int a) : data(a){}
+};
+
+class child : public parent {
+    private : 
+        int data;
+    public :
+        chill(int value ) : parent(value){}
+};
+```
+
+</details>
 </details>
 
 </details>
