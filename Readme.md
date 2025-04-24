@@ -606,6 +606,50 @@ int main (void){
 
         Mã nguồn dễ đọc và bảo trì:
         Sử dụng STL làm cho mã nguồn ngắn gọn, dễ hiểu và có tính module cao.
+
+<details>
+<summary><h4>💙 Templates <h4></summary>
+
+- Cung cấp một cách để tạo ra các hàm hoặc các lớp mà kiểu dữ liệu được định nghĩa 1 cách tổng quát. Khi sử dụng templates c++ sẽ tạo ra các phiên bản cụ thể của các hàm hoặc các lớp tương ứng trong quá trình biên dịch
+
+- Function templates : Cho phép định nghĩa hàm với kiểu dữ liệu tổng quát
+
+vd 
+```c++
+template <typename T>
+T add(T a, T b){
+    return a+b;
+}
+
+int main(void){
+    add<float>(5.6, 1.2); // add = 6.7 float
+    add<int>(12,3); // 15 int
+}
+
+```
+
+- Class template : ddinhj nghia lop voi nhieu kieu du lieu khac nhau
+
+```c++
+template <typename A>
+class base{
+    A data;
+    base(A data) : this->data(data){}
+    ~base();
+}
+
+int main(){
+    base<int> obj_1(1); // data = int = 1
+    base<string> obj_2("Khoi"); // data = string = Khoi
+}
+```
+
+
+
+
+
+</details>
+
 </details>
 
 <details>
@@ -623,7 +667,18 @@ cấu trúc
     {body} : xử lý logic 
 ```
 
+Vd 
+```C++
+int main (void){
+    auto num = [](int a ){return a+1 };
+    num(1); // num =2
 
+    vector<int> a = {1,2,3,4,5};
+
+    for_each(a.begin();a.end();[](int x){cout << x<<endl;} );
+}
+
+```
 </details>
 
 </details>
