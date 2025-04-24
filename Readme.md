@@ -538,6 +538,10 @@ int main(void){
     output : Derived destructor called
              Base destructor called
 
+
+
+
+</details>
 <details>
 <summary><h4>💙 Abstract <h4></summary>
 
@@ -548,9 +552,13 @@ int main(void){
 - lợi ích là nó tanwng tính linh hoạt và khả năng mở rộng. các lớp mới dễ dàng kế thừa và triển khai mà không cần thay đổi mã nguồn hiện tại. Hổ trợ đa hình giúp các đối tượng khác nhau có thể xử lý thông qua 1 giao diện chung.
 
 </details>
+</details>
 
+<details>
+<summary><h3>🌏 Smart pointer <h3></summary>
+
+- Smart pointer là gì 
 
 </details>
 
-</details>
 </details>
