@@ -555,9 +555,74 @@ int main(void){
 </details>
 
 <details>
-<summary><h3>🌏 Smart pointer <h3></summary>
+<summary><h3>🌏 Smart pointer  <h3></summary>
 
-- Smart pointer là gì 
+- smart pointer là một khái niệm dùng để quản lý tự động vùng nhớ động và tài nguyên, thay vì phải lo lắng về việc giải phóng vùng nhớ sau khi dùng. Smart pointer sẽ tự động giải phóng sau khi dùng tránh rò rỉ và duoble delete trong lập trình.
+
+- Các loại smart pointer
+
+    Unique pointer : Chỉ định rỏ quuyền sở hữu ownship của tài nguyên , tại 1 thời điểm chỉ có 1 unique pointer không thể sao chép nhưng có thể move nó. 
+
+    Share poniter : Hổ trợ nhiều đối tượng chia sẽ quyền sở hữu, nó dùng reference count để đếm số lượng đối tượng đang sở hữu khi mà = 0 thì sẽ tự động giải phóng vùng nhớ. 
+
+```c++
+int main (void){
+    std::share_ptr<int> ptr_1 = std::make_share<int>(20); // count = 1
+    {
+        std::shared_ptr<int> ptr2 = ptr1; //count = 2
+    }
+    //count = 1
+    return 0;  // count = 0
+
+}
+```
+    Luu y khi dùng share_pointer phải tránh vòng lập tham chiếu như share A = share b ; và share b lại = share a nếu như vậy referent count sẽ không bao giờ bằng 0; 
+
+    Cách giải quyết là dùng weak pointer vì weak pointer không tăng vòng lập tham chiếu. nó chỉ theo dỗi share poniter mà không tham gia vào quyền sở hữu
+
+</details>
+
+<details>
+<summary><h3>🌏 STL<h3></summary>
+
+- Là 1 thư viện tiêu chuẩn trong c++ cung cấp 1 tập hợp các công cụ mạnh mẻ trong c++ để làm việc với cấu trúc dữ liệu và thuật toán. Nó được thiết kế để giúp Dev dễ dàng thao tác với dữ liệu đồng thời đảm bảo tính hiệu quả trong việc quản lý bộ nhớ, xử lý các phép toán, và thực thi các thuật toán phổ biến. 
+
+- Container : là 1 cấu trúc dữ liệu giúp nó quản lý cá nhóm phân tử  các contaner tiêu biểu như list vector 
+
+- Algorithm : STL cung cấp các thuật toán được định nghĩa trước để xử lý dữ liệu như: Sắp xếp (sort) Tìm kiếm (find) Duyệt (for_each) Loại bỏ (remove) Thuật toán hoạt động trên các container thông qua iterators.
+
+- Iterarors : Iterators là công cụ để duyệt qua các phần tử trong containers. Nó tương tự con trỏ, giúp bạn truy cập tuần tự các phần tử.
+
+- Lợi ích của STL:
+
+        Tăng năng suất lập trình:
+        Giảm thời gian viết mã nhờ các công cụ đã được tối ưu và thử nghiệm kỹ lưỡng.
+
+        Tính linh hoạt:
+        STL cung cấp các công cụ có thể làm việc với bất kỳ loại dữ liệu nào thông qua templates.
+
+        Hiệu suất cao:
+        Các cấu trúc dữ liệu và thuật toán trong STL được tối ưu hóa để hoạt động hiệu quả cả về tốc độ và sử dụng bộ nhớ.
+
+        Mã nguồn dễ đọc và bảo trì:
+        Sử dụng STL làm cho mã nguồn ngắn gọn, dễ hiểu và có tính module cao.
+</details>
+
+<details>
+<summary><h3>🌏 Lambda expressions<h3></summary>
+
+- Là 1 hàm ẩn danh được khai báo ngay tại nơi cần sử dụng. nó hoạt động như 1 hàm bình thường nhưng có 1 số điểm khác biệt : Không cần đặt tên , có thể truyền trực tiếp vào hàm khác, có thể bắt biến từ môi trường bên ngoài. 
+
+- lợi ích viết hàm ngắn gọn xử lý lọgic ngay tại thời điểm và nó thích hợp với các hàm STL library.  
+
+cấu trúc 
+```c++
+    [capture] (int x) {body}
+    capture : bắt biến từ môi trường bên ngoài 
+    (int x) : parameter 
+    {body} : xử lý logic 
+```
+
 
 </details>
 
