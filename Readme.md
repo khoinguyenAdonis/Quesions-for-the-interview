@@ -675,10 +675,179 @@ int main (void){
 
     vector<int> a = {1,2,3,4,5};
 
-    for_each(a.begin();a.end();[](int x){cout << x<<endl;} );
+    for_each(a.begin();a.end();
+        [](int x){
+            cout << x<<endl;
+        } 
+    );
 }
 
 ```
 </details>
 
 </details>
+
+<details>
+<summary><h2>☑️  Linux <h2></summary>
+
+- Là 1 hệ điều hành mã nguồn mở, thuộc họ hệ điều hành giống Unix được xây dựng dựa trên nhân linux. Nổi tiếng với tính linh hoạt ổn định và bảo mật. Thường dùng cho máy chủ, thiết bị nhúng và cả máy tính cá nhân. Đặc điểm nổi bật của Linux là mã nguồn mở, cho phép mọi ng có thể xem và sửa đổi và phân phối mã nguồn điều này làm cho cộng đồng mạnh mẻ và liên tục cải tiến. 
+<details>
+
+<summary><h3>⏩ Linux file system <h3></summary>
+
+- Tổng quan về file 
+    
+    Regular file : các file như file text, file excutable
+    Directories file : file chứa các file khác.
+    Character device file: file đại diện cho các thiết bị không có địa chỉ vùng nhớ. (các ngoại vi như chuộc )
+    Block deviec file: File đại diện cho các thiết bị có địa chỉ vùng nhớ (usb bộ nhớ)
+    Link file : file đại diện cho file khác. 
+        -Hard link: Chia sẻ dữ liệu, file này mất thì file kia vẫn dùng được.
+
+        -Soft link: Chỉ dẫn đường tới file gốc, file gốc mất thì link bị "hỏng."
+    
+    Socket file : file đại diện cho socket
+    pipe file : file đại diện cho pipe
+
+- Phân quyền 
+
+    -rwxrw-rw-
+
+    dấu dầu tiên là loại file 
+    3 vị trí têp là là user (u) : 
+    3 vị trí kế là group (g) : Linux cho phép add ng dùng vào group nên chỉ có ng trong group mới được sữa
+    3 vị trí cuối là other (o) : ai cũng có quyến sữa
+
+    read (r), write (w), excute(x)
+
+lệnh đổi user , sudo chown <name> <file>
+lệnh đổi về root 
+sudo chown root file_name
+Thay đổi nhóm:
+
+bash
+sudo chown :root file_name
+Thay đổi cả user và group:
+
+bash
+sudo chown root:root file_name
+
+giao tiếp với file có các hàm như system call 
+
+open (file, flag mode) return fd(file descriptor)
+
+write (fd, buf, size)
+
+
+
+
+</details>
+<details>
+
+<summary><h3>⏩ Multi-Threading <h3></summary>
+
+- cho phép chương trình thực thi nhiều tác vụ đồng thời với nhau. từ đó tăng hiệu suất và giảm thời gian chờ của ứng dụng 
+
+- contextswitch time : thread switch lẹ hơn process.
+- Share memory : các thread nằm cùng 1 process dễ dàng trao đổi dữ liệu với nhau . Trên hệ thống multi-core thì các thread có thể hoạt song song với nhau. Nếu 1 thread mà bị block thì các thread khác vẫn hoạt động bình thường. và khi tạo 1 thread thì chúng sẽ được đặt trong stack segment. 
+
+- Nếu crashed thì các threads trên cùng 1 process sẽ bị tạm dừng ngay. Các thread thì nó sẽ ngang hàng với nhau. 
+
+- Để định danh 1 thread thì nó là threadID có thể là số nguyên hoặc nó là 1 struct thông thường nó là 1 struct. Để mà so sánh 2 thằng struct này thì có hàm pthread_self() : threadID và pthread_equal() : truyền vào 2 thread và trả lại kết quả xem nó có giống nhau không .
+
+- Khi viết 1 hàm main process thì hàm đó đc gọi là main thread luôn. tiến trình mà chỉ có main thread thì đơn luồng. còn tiến trình mà tạo thread là đa luồng. 
+
+</details>
+<details>
+
+<summary><h3>⏩ Socket <h3></summary>
+
+- là 1 cơ chế truyền thông cho phép các tiến trình có thể giao tiếp với nhau trên cùng 1 thiết bị hay kể cả là khác thiết bị.
+
+- socket được đại diện bởi 1 file socket descriptor. thông tin được mô tả trong file socket 1 domain, type, protocol. 
+
+-> Domain : Unix domain, Internet domain
+
+    Unix domain : giao tiếp giữa các tiến trình trê cung 1 thiết bị.
+
+    Internet domain : giao riếp thông qua Internet IPV4 IPV6.
+
+-> Type có 2 loại : 
+
+    Stream socket (TCP) : qua 3 bước bắt tay để tạo liên kết 
+    -> Bind 
+    -> Listen 
+    -> accept 
+    - dữ liệu truyền đi tin cậy đảm bảo nhận theo thứ tự , yêu cầu tạo kết nối trước khi truyền, thường dùng khi chuỗi dữ liệu bit
+
+    Datagram socket (UDP) : nó đơn giản hơn TCP
+    - Không tin cậy dữ liệu truyền đi có thể mất, khoogn theo thứ tự, không có thông báo khi truyền lỗi. Không cần tạo kế nối trước khi truền. Truyền data ngay cả khi tiến trình khác k tồn tại. Thường được dùng nếu dữ liệu là các gói tin,
+
+
+-> ptotocol là cách thức đóng gói dữ liệu cung 1 cập Domain và type chỉ tồn tại 1 protocol nên thường bằng 0 
+
+các bước dùng các system call socket (stream)
+
+Master :
+    socket : tạo file socket
+    blind : gán socket với địa chỉ
+    listen : lắng nghe các kết nối trong hàng đợi
+    accept : chấp nhận các kết nối.
+client
+    connect -> master accept 
+
+    sau đó giữa 2 socket sẽ trao đổi qua read anh write
+
+các bước dùng các system call socket (UDP)
+
+    socket : tạo file socket
+    blind : gán socket với địa chỉ
+
+    sau đó giữa 2 socket sẽ trao đổi qua read anh write
+</details>
+<details>
+
+<summary><h3>⏩ Character device file <h3></summary>
+
+- là mọt loại file trên linux/ unix dùng để giao tiếp giữa user space và kernel space bằng cách ghi và đọc từng byte thường được sử dungjh các thiết bị như usb, thiết bị ngoại vi. đây là cách hữu ích để truyền dữ liệu hoặc gửi yêu cầu. 
+
+- Majo và Minor Là : Là 2 thông số quan trọng trong quản lý các thiết bị và tệp thiết bị. Major number đại diện cho trình điều khiển tương ứng mà kernel dùng để giao tiếp với thiết bị. Minor number là loại cụ thể mà Major quản lý. 
+
+- Class đại diện cho 1 nhóm thiết bị cùng loại giúp cho việc tổ chức và quản lý thiết bị tốt hơn. khi tạo classs các thiết bị cùng 1 class sẽ xuat hienj trong sys/class.
+
+- class hổ trợ tạo device file tương ứng trong dev khong cần phải tạo thủ công bằng mknod. 
+
+- dễ dàng mwor rộng tái sử dụng do nó tạo 1 giao diện chung cho tát cả các thiết bị trong cùng 1 nhóm 
+
+- thích hợp với hệ thống sysfs nó sẽ tạo ra các entry tương ứng trong sysfs. Entry chứa các thuộc tính trạng thái của thiết bị cho phép người dùng hoặc ứng dụng thao tác với thiết bị thông qua các tệp trong sys/class
+
+các lệnh tạo 
+
+    int alloc_chrdev_region(dev_t * dev, unsigned baseminor, unsigned count, const char * name); lệnh cấp phát mijor, minor
+
+    struct class : struct tạo class 
+
+    struct class * __class_create(struct module * owner, const char * name, struct lock_class_key * key); : lệnh tạo class
+
+    struct device * device_create(struct class * class, struct device * parent, dev_t devt, void * drvdata, const char * fmt, ...); lệnh tạo device
+    
+trong linux khi các lệnh tạo sẽ có các leebnhj hủy tương ứng
+
+như class thì class_destroy, device_destroy
+cấp phát thì có lệnh hủy cấp pháp unregister_chrdev_region : hủy đăng ký mijor and minor.
+
+- Cấu trúc cdev struct là một phần của charactor device interface. Cấu trúc của nó giúp dễ dàng đăng ký và quản lý thiết bị với kernel. Mỗi thiết bị ký tự trong kernrnel thường được liên kết với instance của struct cdev. Nó liên kết thiết bị với hàm gọi hệ thống systemcall như open read, write , ioctl thông qua file_operations.
+
+các thành phần chính của nó : 
+    
+    Kobject : đối tượng quản lý. 
+    const struct file_opeartions *ops trỏ đến bảng hàm thao tác trên file
+    dev_t dev : lưu Mijor minor.
+    count : số lượng thiết bị quản lý
+
+
+
+</details>
+
+</details>
+
