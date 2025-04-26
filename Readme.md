@@ -845,6 +845,135 @@ các thành phần chính của nó :
     dev_t dev : lưu Mijor minor.
     count : số lượng thiết bị quản lý
 
+Example 
+```c
+#include <linux/module.h> 
+#include <linux/fs.h>
+#include <linux/device.h>
+#include <linux/cdev.h>
+
+struct __MDEV{
+    struct class *m_class;
+    dev_t m_dev;
+    struct cdev m_cdev;
+}mdev_t;
+
+/*Function prototype*/
+static ssize_t m_read(struct file *flip, char __user *buf, size_t size, loff_t *offset );
+static ssize_t m_write(struct file *flip, char __user *buf, size_t size, loff_t *offset );
+static int m_open(struct inode *inode, struct file *flip);
+static void m_close(struct inode *inode, struct file *flip);
+
+static struct file_operations fops = {
+    .owner = THIS_MODULE,
+    .read = m_read,
+    .write = m_write,
+    .open = m_open,
+    .release = m_close
+};
+static int __init module_init(void){
+    /*alloc region*/
+
+    if (alloc_chrdev_region(&mdev_t.m_dev, 0,1,"m_dev") < 0){
+        pr_err(" Alloc region failed\n");
+    }
+
+    /*create class*/
+    mdev_t.m_class = class_create(THIS_MOUDLE,"class_dev");
+
+    if(device_create(mdev_t.m_class,NULL, mdev_t.m_dev,NULL, "m_device") < 0){
+        pr_err("error");
+    }
+
+    /*Create cdev struct*/
+    cdev_init(&mdev_t.m_cdev,&fops);
+
+    /*adding charracter device to the systerm*/
+    cdev_add(&mdev_t.m_cdev,mdev_t.mdev, 1 );
+}
+
+```
+</details>
+<details>
+<summary><h3>⏩ Sysfs<h3></summary>
+
+Sysfs là gì : là 1 hệ thống tập tin ảo trong linux cung cấp giao diện giúp người dùng có thể truy cập và cấu hình các thông số của kernel thông qua hệ thống tập tin 
+thường được gắn vào /sys nó thay thế /proc ở mục đích rỏ hơn ở thông tin hệ thống. 
+sys tập trung vào thông tin phân cứng và kernel trong khi đó proc thì cung cấp tập trung vào thông tin tiến trình 
+
+- Để tạo sysfs cần dùng kobject hoặc device_create_file() sau khi tạo sẽ xuất hiện entry bên trong /sys
+
+- sysfs hổ trợ các thao tác độc ghi qua attribute có callback  show() để đọc hoặc strore() để ghi.
+
+- ứng dụng thực tế quản lý thiết bị phần cứng mà không truy vấn trực tiếp đến kernel 
+
+- Có thể thay đổi thông số kernel thông qua cách ghi data mà không cần reboot 
+
+- nó có ảnh hưởng đến hiệu suất hệ thống nhưng không đáng kể vì nó lưu thông tin kernel ở dạng file text đơn giản. nếu 1 driver ghi vào file sys ở tốc độ cao nó có thể gây quá tải I/O.
+
+- rủi ro khi dùng sysfs như : ghi nhầm thông tin phần cứng. Lộ thông tin phần cứng. cần đặt quyền truy cập đúng để tránh những thay đổi không mong muốn. 
+
+
+</details>
+
+<details>
+<summary><h3>⏩ device-tree <h3></summary>
+
+- Device tree là một file mô tả phần cứng ở dạng cấu trúc cây, mỗi device là 1 node mỗi node sẽ mang các thuộc tính và các thuộc tính có thể được mang dữ liệu hoặc để tróng.
+
+- Vai trò của device tree : giúp hệ điều hành hiểu và quản lý phần cứng không sửa kernel. 
+- Cấu trúc là dạng cây : với các device là các node, mỗi node có các thuộc tính và con của nó có thể là node khác. 
+- Hoạt động : khi khởi động kernel sẽ đọc device tree để nhận diện phần cứng.
+- Khai báo : thường được viết theo ngôn ngữ DTS(device tree source) và biên dịch thành DTB để kernel dùng. 
+- ứng dungpj phổ biến trên các hệ thống linux chạy trên kiến trúc ARM đăcj biệt thiết bị nhúng.
+
+cấu trúc device tree : 
+
+kiểu dữ liệu số nguyên 32 bit đặt trong dấu <>
+string trong dấu "".
+boolean là 1 thuộc tính trống nếu khai báo trong device tree tức là nó true. không thì nó mặc địa false.
+
+-> quy ước đặt tên : <name>[@address]{propertive} name lên đến 31 ký tự . address chỉ được dùng để truy cập vào node có thể không khai báo luôn. 
+
+ALias, lable, pHandle
+
+    aliases {
+    ethernet0 = &fec;
+    gpio0 = &gpio1;
+    gpio1 = &gpio2;
+    mmc0 = &usdhc1;
+    [...]
+    };
+    gpio1: gpio@0209c000 {
+        compatible = "fsl,imx6q-gpio", "fsl,imx35-gpio";
+        [...]
+    };
+    node_label: nodename@reg {
+        [...];
+        gpios = <&gpio1 7 GPIO_ACTIVE_HIGH>;
+    };
+
+lable là cách để định danh 1 node bằng 1 cái tên duy nhất thực tế tên này được chuyển thành 1 giá trị 32bit ở DT compiler. ở ví dụ trên thì gpio1 và node_label là lable. 
+
+Phandle là 1 giá trị 32bit liên kết với node. Và được sử dụng để định danh 1 node để có thể tham chiếu đến node dó từ thuộc tính của node khác. bằng cách sử dụng <&gpio1> ta có thể trỏ đến 1 node có tên là lable là gpio1
+
+Để kernel có thể kiểm soát hể cả cây tìm 1 node thì khái niệm alias ra đời . Alias không được dùng trực tiếp tròn DT nhưng nó sẽ được kernel dùng. Ta có thể dùng hàm find_node_by_alias() để tìm đến 1 node 
+
+lưu ý nến không định danh phandle ở node muốn trỏ tới thì phải dùng lable hoặc alias để dùng phandle tham chiếu đến nếu muốn gọi node từ node kahcs
+
+vd khong dùng lable tham chiếu phải định danh phandle là số nguyên ở node muốn dùng làm tham chiếu 
+
+    gpio@0209c000 {
+        compatible = "fsl,imx6q-gpio";
+        phandle = <0x1>;  // Định danh node bằng phandle
+    };
+
+    led {
+        gpios = <&0x1 7 GPIO_ACTIVE_HIGH>;
+    };
+
+
+
 
 
 </details>
