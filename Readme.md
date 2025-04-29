@@ -1043,6 +1043,6 @@ Các lệnh thường dùng trong U-boot
     - Đảm bảo toolchain tương thích với thiết bị mục tiêu
  
 </details>
-
+bun oc cho
 </details>
 
