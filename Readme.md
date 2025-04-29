@@ -978,5 +978,71 @@ vd khong dùng lable tham chiếu phải định danh phandle là số nguyên �
 
 </details>
 
+<details>
+<summary><h3>⏩ U-boot <h3></summary>
+
+- là 1 bootloader mã nguồn mở sử dụng rộng rải trong embedded linux để khởi động hệ thống và tải kernel vào bộ nhớ. U-boot hỗ trợ nhiều kiến trúc phần cứng khác nhau từ ARM, x86, đến powerPC. U-bôot giúp nhà phát triển thiết lập hệ thống ban đầu và chuẩn bị môi trường để kernel hoạt động. 
+
+- các giai đoạn trong quá trình của u-boot gòm :
+    - giai đoạn rom code mã rom đươc nhà phát triển nạp sẵn vào flash để tiềm kiếm bộ nhớ ngoài để tải và thực thi giai đoạn SPL
+    - SPL (seconds program loader) : Là 1 chương trình nhỏ của rom code.(thường nó được load và chạy file MLO) dùng để khởi tạo DRAM và tải TPL hoặc load thẳng u-bool đầy đủ. 
+    - TPL (thirt program loader) : thường chỉ xuất hiện trên các hệ thống phức tapj dùng để thực hiện các khởi tạo bổ sung trước khi u-boot được tải.
+    - Giai đoạn U-boot : U-boot đầy đủ được tải vào bộ nhớ, cho phép người dùng thực thi tải kernel và hệ thống file root  
+
+Cấu trúc u-boot : 
+    MLO/Image
+    tệp uEnv.txt : tùy chỉnh các hành vi của u-boot như viết script để thực thi các hành vi boot 
+    
+
+Các lệnh thường dùng trong U-boot
+
+    bdinfo : xem thông tin hệ thống phần cứng hiện tại 
+    printenv: in ra tất cả các biến môi trường hiện đang lưu trong u-boot 
+        loadaddr : địa chỉ load kernel 
+        fdtaddr : địa chỉ device tree
+        bootcmd : thiết bị boot
+        in ra 1 biến cụ thể printenv <name>
+
+    các lệnh liên quan : 
+        setenv : đặt sửa 1 biến môi trường
+        saveenv : lưu lại 
+
+    mmc list : kiểm tra các thiết bị mmc (sd card, emmc)
+
+    lệnh load kernel vào vùng địa chỉ 
+    step 1 chọn ổ sd card hoặc emmc : mmc dev 0 
+    step 2 load kernel từ file zImage được lưu /boot/,, : 
+        load <mmc> <loại mmc : partinsion> <address on ram> <file path image>
+        vd : load mmc 0:1 ${loadaddr} /boot/zImage
+    step 3 load devietree
+        trương tự như load kernel 
+    step 4 dùng lệnh boot để boot và
+        bootz : zImage
+        bootm : fitImage, uImage
+        booti : arm4 Image
+    
+</details>
+
+<details>
+<summary><h3>⏩ Cross compiler<h3></summary>
+
+- Cross compiler là gì : là quá trình biên dịch mã nguồn trên một máy tính có kiến trúc khác với thiết bị mục tiêu. Thường được thực hiện trên các máy có cấu hình mạnh để tạo ra các tệp thực thi chạy trên các kiến trúc nhỏ gọn có cấu hình không mạnh để tối ưu thời gian build. 
+
+- Tại sao lại dùng cross compiler : 
+
+    - tiết kiệm tài nguyên : thiết bị nhúng thường có phần cứng hạn chế không đủ để biên dịch mã nguồn.
+    - tăng tốc độ phát triễn : Máy phát triển có cấu hình mạnh giúp biên dịch nhanh chống hơn so với thiết bị nhúng.
+    - linh hoạt : Hỗ trợ nhiều kiến trúc phần cứng, từ ARM, x86 ... 
+
+- toolchain là 1 công cụ bao gồm trình biên dịch(compiler), trình liên kết (linker), và 1 số côn cụ khác , một số toolchain phổ biến như :
+    Linaro toolchain : 1 tỏng những toolchain phát triển kiến trúc ARM
+    GCC : được sử dụng rộng rãi phát triển nhúng. 
+
+- Thách thức khi làm việc với Cross compiler : 
+    - cấu hình phức tạp : việc thiết lập toolchain đồi hỏi hiểu biết sâu
+    - Đảm bảo toolchain tương thích với thiết bị mục tiêu
+ 
+</details>
+
 </details>
 
