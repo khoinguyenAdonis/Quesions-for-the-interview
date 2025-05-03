@@ -1043,6 +1043,76 @@ Các lệnh thường dùng trong U-boot
     - Đảm bảo toolchain tương thích với thiết bị mục tiêu
  
 </details>
-bun oc cho
+
+</details>
+
+<details>
+<summary><h2>C question interview <h2></summary>
+
+<details>
+<summary><h3> Quá trình Preprocessing có diễn ra đối với assambly code hay không?<h3></summary> 
+
+- Trả lời cho câu hỏi này là vừa có vừa không. 
+
+- có khi phụ thuộc vào toolchain và phần mở rộng của file > Ví dụ trong GCC hoặc ARM clang nếu file assembly đuocwj lưu dưới dạng .S thì trình biên dịch sẽ gửi file qua tiền xử lý như ngôn ngữ C và ta có thể sử dụng các chỉ thị xử lý như #include #define trong mã ngược lại.
+- Không khi được lưu dưới dạng .s thì quá trình preprocessing sẽ không diễn ra và mã được gửi thẳng đến assembler để biên dịch ra mã máy. 
+
+</details>
+<details>
+<summary><h3> Macro bitwase <h3></summary> 
+
+- AND
+```c
+    0100
+    0111
+    ----
+    0100
+```
+
+- OR
+```c
+    0100
+    0111
+    ----
+    0111
+```
+
+- XOR
+```c
+    0100
+    0111
+    ----
+    0011
+```
+
+
+
+
+- Swap dibbles bye:
+
+```c
+#define     SWAP_DIBBLES_BYTE(data)     (((data & 0x0F)<<4) | ((data & 0xF0)>>4))
+```
+
+- Swap Two byte
+
+```c
+#define     SWAP_TWO_BYTE(data)     (((data & 0x00FF)<<8) | ((data & 0xFF00)>>8))
+```
+
+-Swap Tow number dont use temp 
+
+```c
+#define     SWAP_TWO_NUM(a,b)       (a ^= b ^= a ^= b)
+
+// Explain :  a ^ a = 0
+    a = a^b 
+    b = b^a = b ^ (a^b) => b = a
+    a = a ^ b = a ^ (b ^ a) => a = b
+```
+
+
+</details>
+
 </details>
 
