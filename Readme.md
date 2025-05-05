@@ -1114,5 +1114,107 @@ Các lệnh thường dùng trong U-boot
 
 </details>
 
+<details>
+<summary><h3> Startup code là gì  <h3></summary> 
+
+- Là 1 một khối nhỏ thường được viết bằng asm chuẩn bị cho code phần mềm được viết bằng ngôn ngữ cao hơn như C/C++. Nó dùng đễ setup data memory. Nó cũng khởi tạo bằng không cho một phần dữ liệu chưa được khởi tạo khi nạp chương trình. 
+
+- Follow theo các bước : 
+    Disable all interrupt.
+    Copy bất kỳ các dât được khởi tạo từ rom to ram 
+    Set = 0 cho các dâta không được khởi tạo
+    Bật interrupt 
+    cài đặt process stask pointer
+    cài đặt vùng Heap
+    (c++) thực thi các constructor and cài đặt all global variable
+    call main() function
 </details>
+<details>
+<summary><h3> Buffer overFlown  <h3></summary> 
+
+What is Buffer :
+    Bạn có thể hiểu buffer là một "khu vực có giới hạn" trong bộ nhớ, nơi các biến của chương trình có quyền truy cập. Nếu chương trình truy cập vượt ngoài ranh giới của buffer (gọi là buffer overflow), có thể gây ra lỗi hoặc bị khai thác bởi hacker.
+
+Khi overflown chương trình có thể bị crash hoặc gây ra các hành vi không mông muốn. và kẻ tấn công có thể tấn công là chương trình lỗi làm hongt dữ liệu hoặc đánh cấp dữ liệu liên tư.
+
+
+</details>
+<details>
+<summary><h3> Callback funtion  <h3></summary> 
+
+Callback là gì : Callback về cơ bản là bất kỳ mã thực thi nào được chuyển làm đối số cho mã thực thi khác. Mã đó dự kiến sẽ gọi hoặc thực thi đối số đó tại 1 thời điểm nó được gọi. 
+Vd : trong cơ bản nếu tham chiếu của hàm đucợ chuyển sang hàm khác là đối số để gọi thì nó được gọi là callback. Trogn C thì hàm callback được gọi thông qua con tro hàm (function pointer)
+tuân thủ các bước : 
+ - Callback function
+ - A callback registration
+ - Callback excution
+
+</details>
+
+<details>
+<summary><h3> Watch dog timer là gì <h3></summary> 
+
+- là 1 thành phần phần cứng hoặt phần mềm được thiết kế để phát hiện và khôi phục hệ thống khỏi các sự cố hoặc lỗi hoạt động.
+
+- cách nó hoạt động : 
+    khởi tạo thời gian chờ : đây là khoảng thời gian tối đa mà hệ thống hoạt động k cần báo lại cho Watchdog
+    Feeding the watchdog : có thể hiểu là trong quá trình hoạt độn phần mềm sẽ liên tục định kỳ cung cấp cho watchdog timer không bị kéo về 0
+    Phát hiện time out : nếu như vì lý do gì đó mà chương trình k cung cấp cho watch dog và thời gian của watch dog timer về 0 thì gây ra sự kiện time out.
+    Khi xảy ra timeout sẽ kích hoạt hành động phục hồi hệ thống. thường thì reset cả chương trình ở các hệ thống phúc tạp hơn thì kích hoạt ngắt để phần mềm cố gắng khôi phục lỗi trc khi reset. 
+
+Lợi ích : tăng độ tin cậy và ổn định. Ngăn chặn hệ thống treo. tự động phục hồi lỗi, an toàn
+
+</details>
+
+<details>
+<summary><h3> Read modify write technique là gì <h3></summary> 
+- Khi làm việc với các thanh ghi phần cứng việc ghi vào chúng có thể ảnh hưởng đến nhieuf bit khác nhau. mục tiêu của RMW là chỉ thay đổi các bít mà chúng ta muốn giữ nguyên các giá trị còn lại 
+
+các bước : 
+    - đọc giá trị hiện tại cảu thanh ghi phần cứng vào 1 biến tạm . 
+    - sửa đổi dùng các phép logic để sửa đổi những bít mà ta muốn thay đổi tại biến tạm .
+    - ghi giá trị của biêns tạm đã đucợ sửa đổi vào thanh ghi phần cứng.
+
+</details>
+
+
+<details>
+<summary><h3> LCall and ACALL <h3></summary> 
+
+- LÀ 1 instruction trong tập lệnh của 8051 được thực hiện một long call đến 1 subroutine(chương trình con) ở bất kỳ vị trí nào của chương trình.
+
+- Hoạt động của nó : 
+    1 Opcode : lệnh có 1 mã hoạt động cụ thể là 0x12
+    2 toán hạng(operand) : theo sau opcode là 1 địa chỉ 16bit(2byte) chỉ định địa chỉ của 1 subroutine mà bạn muốn gọi. 
+
+    Hoạt động :
+        Đầu tiên con trỏ PC sẽ tăng thêm 3 đến vị trí instruction theo sau của LCALL.
+        Lưu giá trị của con trỏ PC vào stack. 
+        Nạp địa chỉ hay là giá trị của oprand Lcall vào con trỏ PC.
+        Chuyển quyền điều khiển MCU sẽ bắt đầu thực thi các instruction từ địa chỉ mới 
+        Sau khi thực hiện xong Lệnh RET sẽ lấy địa chỉ trả về từ stack đã lưu và nạp lại vào con trỏ PC sau đó chương trình sẽ thực thi ngay dưới lệnh LCALL
+
+Khác biệt với ACALL ở chổ : ACALL chỉ có thể có 1 byte toán hạng nên khi gọi chỉ gọi chương trình con trong cùng 1 trang (2kb) hay trang kế.
+
+</details>
+
+<details>
+<summary><h3> LCall and ACALL <h3></summary> 
+
+- Virtual memory ( bộ nhớ ảo ) là 1 kỹ thuật quản lý bộ nhớ sử dụng bởi hệ điều hành để cấp cho mỗi tiến trình một không gian bộ nhớ ảo riêng biệt. Không gian bộ nhớ này độc lập với Ram của hệ thồng. 
+- Trong các hệ thống nhúng phức tạp (các hệ điều hành thời gian thực như RTOS hoặc các hệ điều hành đa nhiệm như Linux) nó được dùng cho các mục đích sau : 
+
+1. Mở rộng không gian địa chỉ : Các hệ thống nhúng có thể có bộ nhớ vật lý hạn chế. VirMemory cho phép các tiến trình có không gian địa chỉ lớn hơn nhiều so với Ram thực tế. Điều này đạt được bằng cách sử dụng 1 phần bộ nhớ thứ cấp như (flash memory hay 1 bộ nhớ khác) làm bộ đêmj cho ram. 
+
+
+
+</details>
+
+
+</details>
+
+
+
+
+
 
