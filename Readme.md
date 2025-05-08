@@ -1205,13 +1205,128 @@ Khác biệt với ACALL ở chổ : ACALL chỉ có thể có 1 byte toán hạ
 - Trong các hệ thống nhúng phức tạp (các hệ điều hành thời gian thực như RTOS hoặc các hệ điều hành đa nhiệm như Linux) nó được dùng cho các mục đích sau : 
 
 1. Mở rộng không gian địa chỉ : Các hệ thống nhúng có thể có bộ nhớ vật lý hạn chế. VirMemory cho phép các tiến trình có không gian địa chỉ lớn hơn nhiều so với Ram thực tế. Điều này đạt được bằng cách sử dụng 1 phần bộ nhớ thứ cấp như (flash memory hay 1 bộ nhớ khác) làm bộ đêmj cho ram. 
+2. Bảo vệ bộ nhớ : Mỗi tiến trình có 1 vùng nhớ ảo riêng biệt nên ngăn ngừa được việc ghi đè lên nhau. 
+3. Quản lý đơn giản hơn : mỗi tiến trình làm việc với 1 không gian địa chỉ liên tục k cần lo về vị trí thực tết trên RAM. 
 
+Tuy nhiêu có các thách thức khi dùng virtual memory. 
+1. Hiệu suất : hoán đổi giữa RAM và bộ nhớ thứ cấp gây độ trễ đáng kể 
+2. Độ phức tạp của hệ điều hành: 
+3. chi phí bộ nhớ có thể chiếm 1 bộ nhớ nhất định. 
+
+ứng dụng trong nhúng 
+1. chạy các hệ điều hành đa nhiệm hoặc các RTOS tiến trình 
+2. có nhu cầu bảo vệ bộ nhớ mạnh mẽ giữa các tiến trình 
+3. có bộ nhớ thứ cấp đủ cho việc swapping
+ 
 
 
 </details>
 
+<details>
+<summary><h3> Interrupt latency là gì và tại sao phải giảm nó <h3></summary> 
+- Là độ trễ ngắt là khoảng thời hian từ khi thiết bị phần cứng gửi tín hiệu ngắt đến CPU để thực hiện ngắt tương ứng. Nói đơn giản nó là thời gian chờ đợi của CPU trước khi nó phản ứng với 1 sự kiện phần cứng quan trọng. 
+
+- Tại sao chúng ta phải giảm interrupt latence ? : nó rất quan trọng nhất là nó ảnh hưởng đến hiệu suất và tính ổn định của chương trình.
+
+- Các phương pháp giảm interrupt latency : Thiết kế trình xử lý ngắt đơn giản và hiểu quả : 
+    
+    Phần mềm: 
+    Ngắn gọn và nhanh chóng, tránh các hàm gây blocking trong ISRs, dùng các Flag hay queu hàng đợi trong ISRs để giao tiếp giữa task và ISRs, Quản lý ưu tiên ngắt,Phân tích thời ian thực, tối ứu hóa trình biên dịch.
+
+    Phần cứng : 
+    Chọn bộ microcontrolor phù hợp : kiến trúc, số lượng và mức độ ngắt, tốc độ xung nhiệp, bộ nhớ cache.
+    Thiết kế hệ thống bus hiệu quả. 
+
+    Vd dụ cụ thể : ngắt từ bộ mã hóa encoder có thể xảy ra với tần suất rất cao. Đễ giảm dộ trễ, ISR cho encoder nên chỉ độc giá trị bộ đếm và có thể gửi nó vào 1 hàng đợi một tác vụ khác có mức dộ ưu tiên cao hơn sẽ đọc giá trị từ hàng đợi đó để thực hiện các tính toán điều khiển.  
+</details>
+
+<details>
+<summary><h3> Các hành động mà startup code thực hiện <h3></summary> 
+    - Khởi tạo stack pointer 
+    - Thiết lập program counter() và nhảy đến Reset handler. 
+    - sao chep data đã khởi tạo từ flash sang ram (.datasection)
+    - Khởi tạo vunhf nhớ chưa khởi tạo (.bss section) về không, 
+    - trước khi gọi hàm main() khởi tạo c runtime thiết lập các thư viện chuẩn của C, c++ thì có thêm phần khởi tạo các đối tượng tĩnh C++. 
+    - gọi main
+</details>
+
+<details>
+<summary><h3> Giải thích quá trình boot của microconllor <h3></summary> 
+
+- Giai đoạn 1 : Cấp nguồn và reset : 
+    cấp nguồn : các mạch điện bên trong bắt đầu hoạt động. Điện áp ổn định được thiết lập cho các thành phần khác nhau của chip.
+    Reset : Hầu hết các thanh ghi của CPU và các ngoại vi đều được đặt về giá trị mặc định của nsx, Program counter thường đucợ đặc về vị trí bắt đầu của Flash. 
+
+- Giai đoạn 2 : thực thi statup code . Start up code được lưu ở vị trí đầu tiên của flash (vector table chỉ dducocwj khai bảo tại startup code linker sẽ đặt section chứa định nghĩa này vào đúng vị trí bắt đầu của bộ nhớ Flash.)
+
+- Giai đoạn cuối thực thi chương trình ứng dụng. 
+
+các yếu tố ảnh hưởng đến quá trình này : kiến trúc vi điều khiển. Cấu hình cỉa Fuse/Option Bytes. Nếu có Blootloader thì quá trình này có thể sẽ phức tạp hơn. VÌ sao khi reset sẽ gọi bootload trước để bootloader thông báo cho vdk biết vị trí cỉa các ứng dụng = cách cấu hình VTOR. Startup code sẽ chạy tại địa chỉ mà bootloader chuyển giao. 
+
 
 </details>
+<details>
+<summary><h3> Chương trình thực thi Bit by Bit or Byte By Byte bằng cách nào<h3></summary> 
+- Đầu tiên CPU sẽ không thực theo từng bit một cách riêng lẻ mà tùy vào kiến trúc CPU và loại lệnh. 
+Quá trình thực thi được chia thành các giai đoạn chính : 
+1. Tìm và nạp Lệnh (Fetch) : CPU lấy lệnh tiếp theo từ bộ nhớ 
+2. Giải mã lệnh (Decoder) : Xác định phân tích loaị hoạt động cần thực hiện 
+3. Thực thi lệnh : Ở giai đoan này dữ liệu có thể được xử lý ở mức độ bit hoặc byte tùy thuộc vào loại lệnh và kichs thước của toán hạng. 
+4. GHi kết quả: Quá trình ghi cũng diễn ra theo byte hoặc nhiều byte tương ứng kích thước kiểu dữ liệu
+
+
+</details>
+
+<details>
+<summary><h3> Khác nhau giữa bit rate và baudrate <h3></summary> 
+
+- bit rate (tốc độ bit) : là số lượng bit dữ liệu truyền đi trong  1 đơn vị thời gian cụ thể. Vd kbs(kilobit / giây)
+- baudrate  (tốc độ baud) : số lượng thay đổi tín hiệu trong 1 đơn vị thời gian cụ thể. Baudrate cho biết tần suất tín hiệu vật lý thay đổi trạng thái (vd tần số, điện áp, pha) 
+    Vd 9600 baud có nghĩa là tín hiệu thay đổi 9600 lần trên s. 
+-> trường hợp giống nhau khi mỗi tín hiệu(symbol) chỉ mang 1 bit thì bit rate = baudrate
+-> Khác nhau khi mỗi thay đổi tín hiệu (symbol) mang nhiều bit  
+
+</details>
+
+<details>
+<summary><h3> 1 vài câu hỏi mẹo <h3></summary> 
+- Malloc(0) trả về gì ?
+
+    trả về 1 con trỏ null hoặc 0 hoặc 1 con trỏ hợp lệ nhưng không được ghi vào vì hành vi đó là hành vi không xác định gây rò rỉ bộ nhớ. con trỏ này cần được giải phóng để tránh rò rỉ bộ nhớ.
+
+- Lấy vị trí của 1 trường field trong 1 byte ?
+    
+    step 1 tạo func chứ arg trường nhập vào, vị trí bắt đầu, độ dài trường muốn lấy 
+    step 2 tạo bit mask của trường feild nhầm mục đích che đi các bit không cần thiết 
+    step 3 and với bit mask và dịch về đầu để tạo nên kết quả cuối
+
+```c
+uint32_t getFieldValue(byte_t dataByte, uint8_t startBit, uint8_t fieldLength) {
+    // Kiểm tra tính hợp lệ của tham số
+    if (startBit > 7 || (startBit + fieldLength) > 8 || fieldLength == 0) {
+        // Các tham số không hợp lệ
+        return -1; // Hoặc một giá trị lỗi khác tùy bạn định nghĩa
+    }
+
+    // Tạo một mask để lấy các bit của trường
+    uint8_t mask = ((1 << fieldLength) - 1) << startBit;
+
+    // Áp dụng mask và dịch bit để lấy giá trị của trường
+    uint32_t fieldValue = (dataByte & mask) >> startBit;
+
+    return fieldValue;
+}
+```
+- Khai báo 1 hằng số trả về số giây trong một năm bằng bộ tiền xử lý ?
+    #define SECONDS_IN_YEAR (60U * 60U * 24U * 365U)
+
+- Đếm số lượng bit được set của 1 số 
+
+    
+</details>
+
+</details>
+
 
 
 
