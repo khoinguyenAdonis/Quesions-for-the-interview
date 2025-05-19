@@ -712,14 +712,23 @@ Việc porting là cần thiết :
 
 - Không gian địa chỉ (address space)
     2 phần :
+        
         Không gian địa chỉ ảo : mõi tiến trình có 1 không gian địa chỉ ảo riêng. Là 1 phạm vi địa chỉ mà một tiến trình nhìn thấy điều này mang lại 1 số lợi ích. 
+        
             - các tiến trình không thể trực tiếp truy cập bộ nhớ của nhau. Tăng cường bảo mật và ổ định. 
+        
             - các tiến trình sẽ làm việc với các địa chỉ ảo liên tục 
+        
             - chả các trang bộ nhớ (demand paging) được sử dụng mới được tải vào bộ nhớ vật lý khi cần thiết.
+       
         Không gian địa chỉ của kernel : kernel cũng có không gian địa chỉ riêng chứa mã và dữ liệu ánh xạ đến bộ nhớ vật lý. 
+
 - Phân trang (paging): Cả không gian địa chỉ ảo và bộ nhớ vật lý đều được chia thành các trang cố định (thường 4kb trên x86)
+    
     Bảng trang (table page) Kernel duy trì các bảng trang này để ánh xạ các địa chỉ ảo của tiến trình tới các địa chỉ vật lý thực tế. .
+    
     TLB (translation Lookaside buffer) : tăng tốc độ dịch từ địa chỉ ảo sang địa chỉ vật lý bằng cách lưu các ánh xạ gần nhất. 
+
 - Không gian của 1 địa chỉ ảo của 1 tiến trình được chia thành các vùng nhớ khác nhau. stack heap data text bss
 
 1. Linux sử dụng cơ chế phân trang như nào ?
