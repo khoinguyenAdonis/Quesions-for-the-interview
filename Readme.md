@@ -733,7 +733,31 @@ Việc porting là cần thiết :
 
     - Page fault: nếu tiến trình truy cập vào 1 trang chưa được tại vào địa chỉ vật lý trên ram or là đã bị swaping) Khi đó cpu sẽ chuyển quyền cho điều khiển cho kernel 
 </details>
+<details>
+<summary><h3> process <h3></summary>
 
+tạo ra 1 tiến trình mới bằng dùng hàm fork tiến trinhg gọi fork thì tiến trình đó được gọi là tiến trình cha. tiến trình con đucợ tạo ra sẽ copy lại các thuộc tính của tiến trình cha nhưng 2 tiến trình này sẽ nằm riêng biệt ở 2 vùng nhớ khác nhau. 
+
+2 lệnh ;à getpid() : gọi id của tiến trình đang gọi nó
+        getppid() : gọi ra id của tiến trình cha.
+
+Process managemet : 
+
+khi tiến trình con kết thúc (exit()) thì sẽ gửi đến process cha 1 status tiến trình cha sẽ bắt status đó bằng hàm wait ().
+khi wait đucợ gọi nó sẽ bị block. wait() trả về 2 giá trị 1 pid, 2 status kết thúc(fail or true) 
+wait có 1 hạn chế là nếu có nhiều process con thì bất cứ tiến trình con nào kết thúc wait đều trả về. nên sinh ra 1 wait id để xác định đúng tiến trình con kết thúc
+
+tiên trnhf orphane và zombie :
+Khi tiến trình cha kết thúc trước tiến trình con thì process con gọi là process mồ côi(orphane). 
+    Tiến trình con khi này được tiến trình lớn hơn PID =1 thu làm con
+Khi con bị skill trước khi cha gọi wait thì tiến trình đó là tiến trình zombie
+    Con nó sẽ không thể dùng kill để kết trình được nữa.
+    -> các rủi ro : tài nguyên của hệ thống là giới hạn nên các tiến trình cũng có số lượng nhất định
+    dẫn đến các bảng pid_t 
+    cách giải quyết là kill process cha process zombie sẽ trở thành process mồ coi được pid 1 quản lý bên trong thằng 1 sẽ tự động gọi ra wait để thu nhận con. 
+    dùng signal child để bắt lấy mỗi khi tiến trình con kết thúc. 
+
+</details>
 <details>
 
 <summary><h3>⏩ Linux file system <h3></summary>
