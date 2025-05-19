@@ -691,6 +691,49 @@ int main (void){
 <summary><h2>☑️  Linux <h2></summary>
 
 - Là 1 hệ điều hành mã nguồn mở, thuộc họ hệ điều hành giống Unix được xây dựng dựa trên nhân linux. Nổi tiếng với tính linh hoạt ổn định và bảo mật. Thường dùng cho máy chủ, thiết bị nhúng và cả máy tính cá nhân. Đặc điểm nổi bật của Linux là mã nguồn mở, cho phép mọi ng có thể xem và sửa đổi và phân phối mã nguồn điều này làm cho cộng đồng mạnh mẻ và liên tục cải tiến. 
+
+<details>
+<summary><h3> porting <h3></summary>
+
+- điều chỉnh và thích ứng mã nguồn của 1 driver vốn có để có thể hoạt động trên 1 kiến trúc khác .
+Việc porting là cần thiết :
+    - khác kiến trúc như ẢRM x86 
+    - Thay đổi API kernel 
+    \- Yêu cầu nền tảng cụ thể \
+1. khi porting bạn cần làm các bước nào 
+- đọc data sheet của thiết bị mục tiêu , tài liệu API kernel cảu phiên bản mục tiêu. 
+- XẤc định mã nguồn driver hiện tại
+- thiết lập toolchain phù hợp 
+
+</details>
+
+<details>
+<summary><h3> Linux memory managetment<h3></summary>
+
+- Không gian địa chỉ (address space)
+    2 phần :
+        Không gian địa chỉ ảo : mõi tiến trình có 1 không gian địa chỉ ảo riêng. Là 1 phạm vi địa chỉ mà một tiến trình nhìn thấy điều này mang lại 1 số lợi ích. 
+            - các tiến trình không thể trực tiếp truy cập bộ nhớ của nhau. Tăng cường bảo mật và ổ định. 
+            - các tiến trình sẽ làm việc với các địa chỉ ảo liên tục 
+            - chả các trang bộ nhớ (demand paging) được sử dụng mới được tải vào bộ nhớ vật lý khi cần thiết.
+        Không gian địa chỉ của kernel : kernel cũng có không gian địa chỉ riêng chứa mã và dữ liệu ánh xạ đến bộ nhớ vật lý. 
+- Phân trang (paging): Cả không gian địa chỉ ảo và bộ nhớ vật lý đều được chia thành các trang cố định (thường 4kb trên x86)
+    Bảng trang (table page) Kernel duy trì các bảng trang này để ánh xạ các địa chỉ ảo của tiến trình tới các địa chỉ vật lý thực tế. .
+    TLB (translation Lookaside buffer) : tăng tốc độ dịch từ địa chỉ ảo sang địa chỉ vật lý bằng cách lưu các ánh xạ gần nhất. 
+- Không gian của 1 địa chỉ ảo của 1 tiến trình được chia thành các vùng nhớ khác nhau. stack heap data text bss
+
+1. Linux sử dụng cơ chế phân trang như nào ?
+
+    - Chia Bộ nhớ : Bộ nhớ Vật lý ram được chia thanhf các page. 
+                    Không gian địa chỉ của 1 tiến trình cũng được chia thành các trang ảo.
+
+    - Ánh xạ (mapping) : Khi 1 tiến trình truy cập một địa chỉ ảo, phần cứng sẽ phối hợp với kernel để dịch địa chỉ ảo thành 1 địa chỉ vật lý tương ứng. 
+
+    - Demand paging là linux sử dụng 1 kỹ thuật gọi là Demand paging để 1 trang ảo chỉ được tại vào địa chỉ vật lý khi tiến trình thực sự cố gắng truy cập vào. Khi 1 tiến trình khởi chạy hầu hết cac tiến trình của nó không được tải .
+
+    - Page fault: nếu tiến trình truy cập vào 1 trang chưa được tại vào địa chỉ vật lý trên ram or là đã bị swaping) Khi đó cpu sẽ chuyển quyền cho điều khiển cho kernel 
+</details>
+
 <details>
 
 <summary><h3>⏩ Linux file system <h3></summary>
@@ -1329,7 +1372,292 @@ uint32_t getFieldValue(byte_t dataByte, uint8_t startBit, uint8_t fieldLength) {
 
 
 
+<details>
+<summary><h2> Unix Shell Script<h2></summary>
 
+<details>
+<summary><h3> Operators in shell<h3></summary>
 
+## Arithmetic Operator ##
+
+a = 10
+b = 20
+
+| Operators | Description | Example |
+|:----------|:-----------|:---------|
+| &plus | Add values on ether side of operator | 'expr $a &plus; $b' give me 30 |
+| -(Subtraction) | Subtracts right hand operand from left hand operand | 'expr $a - $b' give me -10 |
+| *(mulptilication) | Mulptilies value on either side on operator | 'expr $a * $b' give me 200 |
+| /(division) | Divides left hand operand by right hand operand | 'expr $b / $a' give me 2 |
+| %(Modulus) | Divides left hand operand by right hand operand and returns remainder | expr $b / $a' give me 0 |
+| =(Assignment) | Assigns right operand in left operand | a = $b would assign value of b into a|
+| == (Equality) | Compares two numbers, if both are same then returns true. | [ $a == $b ] would return false.|
+| != (Not Equality) |Compares two numbers, if both are different then returns true. |[ $a != $b ] would return true.|
+
+## Relational Operator ##
+a = 10
+b = 20 
+| Operators | Description | Example |
+|:----------|:-----------|:---------|
+|-eq| Check if the value of two operand are equal or not, if 2 value are equal return true| [ $a -eq $b ] return is not true |
+|-ne| if 2 value are NOT equal return true | [ $a -ne $b ] return is true |
+|-gt| if right operand greater left operand return true | [ $a -gt $b ] return is not true |
+|-ge| if right operand greater or equal left operand return true |  [ $a -gt $b ] return is not true |
+|-lt| if right operand less than left operand return true | [ $a -gt $b ] return is true |
+|-le| if right operand less than or equal left operand return true | [ $a -gt $b ] return is true |
+
+## Boolean Operator ##
+
+a=10 
+b=20
+| Operators | Description | Example |
+|:----------|:-----------|:---------|
+|-!| this invert a true condition into false and vice versa| [ !true ] return false|
+|-o| this is OR logical| [ $a -lt 20 -o $b -gt 100 ] is true|
+|-a| this is AND logical| [ $a -lt 20 -a $b -gt 100 ] is false.|
+
+## String operator ##
+
+a="abc"
+b="edf"
+| Operators | Description | Example |
+|:----------|:-----------|:---------|
+|=| check if value of two operands are equal or not,if Yes return true| [ &a = &b ] return false|
+|!=| check if value of two operands are equal or not,if Yes return false| [&a != &b ] return true | 
+|-z| check size operand zero or not, if zero return true | [ -z $a ] is not true|
+|-n| check size non zero, if zero return false| [ -n $a ] is true|
+|str| check str is not empty, if it empty return false| [ $a ] is true|
+
+## File operator##
+
+Syntax [ Operator $file]
+
+| Operators | Description |
+|:----------|:----------- |
+|-b| Check if file is block special file return true|
+|-c| ---------------- Charactor device file|
+|-d| ---------------- Director file|
+|-f| ---------------- an ordianry file as opposed to a directory or special file|
+|-e| ---------------- is exists |
+</details>
+
+<details>
+<summary><h3> Loop in shell <h3></summary>
+
+## While loop 
+
+syntax 
+
+    while [command] 
+    do 
+        /* Statement to be executed if commnad true */
+    done
+
+## For loop 
+
+sysntax 
+
+    for var in word1 word2 ..... wordn
+    do 
+        Statement to be executed for every word.  
+    done 
+
+## untill loop 
+
+Syntax 
+
+    untill [command] 
+        Statement to be excuted untill to command is true
+    done
+
+## The select loop
+
+syntax 
+
+    select var in word1 word2 ... wordn
+    do 
+        command
+    done 
+
+    select variable: Khai báo một biến (variable) sẽ lưu trữ giá trị (từ word1 đến wordN) mà người dùng chọn.
+    in word1 word2 ... wordN: Đây là danh sách các tùy chọn sẽ được hiển thị trong menu. Mỗi word sẽ trở thành một mục trong menu, được đánh số tuần tự bắt đầu từ 1.
+    do: Bắt đầu khối lệnh sẽ được thực thi sau khi người dùng chọn một tùy chọn.
+    commands: Các lệnh được thực thi trong mỗi lần lặp của vòng lặp. Bên trong khối lệnh này, biến variable sẽ chứa giá trị của tùy chọn mà người dùng đã chọn. Biến đặc biệt $REPLY sẽ chứa số thứ tự mà người dùng đã nhập.
+    done: Kết thúc vòng lặp select.
+
+</details>
+
+<details>
+<summary><h3> Substitution <h3></summary>
+
+Là quá trình thay thế các cấu trúc đặc biệt (biến lệnh biểu thức số học mẫu chuỗi ) bằng kết quả hoặc giá trị tương ứng của chúng trước khi lệnh thực thi.
+
+Example : 
+
+    #!/bin/sh
+
+    DATE='date'
+    echo "Date is $DATE"
+
+Variable Substitution 
+
+|Sr.No|Form & Description|
+|:----|:-----------------|
+|1|${VAR} Substitute the value of VAR|
+|2|${VAR:-WORD} If var is null or unset, WORD is substitute for var, The value of VAR do not change|
+|3|${VAR:+WORD} If var is set, WORD is substitue, The value of VAR do not change |
+|4|${VAR:=WORD} If var is null or unset, var is set to the value of word|
+|5|${VAR:?MESSAGE}If var is null or unset, message is printed to standard error. This checks that variables are set correctly.|
+
+</details> 
+
+<details>
+<summary><h3> Quoting Mechanism <h3></summary>
+là 1 cơ chế trích dẫn trong Shell giúp shell loại bỏ hoặc ngăn chặn việc shell diễn giair các ký tự đặt biệt. điều này giúp truyền 1 ký tự nguyên văn đến lệnh hoặc chưowng trình đang chạy. 
+
+1. Dấu nháy đơn '
+
+Bất ký ký tự nào bên trong dấu nháy đơn được xem là 1 chuổi và không thể thực thi hay thay thế xảy ra trong dấu này. 
+
+    echo 'khoi $date' => output: khoi $date
+
+2. Dấu nháy kép "
+
+- Cho phép thực hiện 1 số loại thay thế Shell vẫn thực hiện variable substitution, command substitution và arithmetic expansion
+- ngăn chặn word spliting và pathname : giữ khoảng trắng bên trong ngăn chặn mở rộng ký tự như *, ? [...] trong file list .
+
+    name="Nguyen Van A"
+    echo "Xin chao $name"   # Output: Xin chao Nguyen Van A (biến được thay thế)
+    echo "The current date is $(date)" # Output: The current date is Fri May 16 11:38:00 +07 2025 (lệnh được thực thi)
+    echo "1 + 1 = $((1 + 1))" # Output: 1 + 1 = 2 (phép toán được thực hiện)
+    echo "List files matching *.txt: *.txt" # Output: List files matching *.txt: *.txt (không mở rộng thành danh sách file)
+
+    message="Hello   world"
+    echo "$message"         # Output: Hello   world (giữ nguyên khoảng trắng)
+    echo $message          # Output: Hello world (word splitting xảy ra)
+3. dấu / 
+
+loại bỏ ý nghĩa của 1 ký tự đặt biệt 
+
+    echo "This string contains a \$ dollar sign." # Output: This string contains a $ dollar sign.
+    echo 'This string contains a \' single quote.' # Output: This string contains a ' single quote.
+    echo "This string has a backslash: \\" # Output: This string has a backslash: \
+    echo "Hello\ world"   # Output: Hello world (khoảng trắng được giữ nguyên trong trường hợp này)
+
+</details>
+
+<details>
+<summary><h3> IO redirection<h3></summary>
+
+chuyển hướng dữ liệu
+'>' ghi và thay thế dữ liệu mới lên dữ liệu cũ.
+'>>' ghi và thay thế 
+
+example 
+
+    khoi@vnpt:~$ who
+    khoi     tty7         2025-05-17 09:35 (:0)
+    khoi     pts/0        2025-05-17 09:35 (:0)
+    khoi     pts/2        2025-05-17 10:49 (:0)
+    khoi@vnpt:~$ who > users
+    khoi@vnpt:~$ cat users
+    khoi     tty7         2025-05-17 09:35 (:0)
+    khoi     pts/0        2025-05-17 09:35 (:0)
+    khoi     pts/2        2025-05-17 10:49 (:0)
+    khoi@vnpt:~$ 
+
+Who => xem các đăng nhập vào mạng và chuyển hướng đầu ra cho file users khi xem file users sẽ lưu các dữ liệu đã chuyển hướng vào. 
+
+Syntax 
+
+    command <redirection> file 
+
+</details>
+
+<details>
+<summary><h3> Function in shell <h3></summary>
+
+syntax 
+
+    #!/bin/sh
+
+    # define your func here 
+    hello (){
+        echo "Hello world"
+    }
+    #invoke your function
+    hello
+
+output 
+
+    ./test.sh
+    Hello world
+
+## pass parameter to function ##
+
+    #!/bin/sh
+
+    # define your func here 
+    hello (){
+        echo "Hello world $1 $2"
+    }
+    #invoke your function
+    hello
+
+output 
+
+    ./test.sh khoi nguyen
+    Hello world khoi nguyen
+
+## returning value of function ##
+
+    #!/bin/sh
+
+    # define your func here 
+    hello (){
+        echo "Hello world "
+        return 10
+    }
+    #invoke your function
+    hello
+
+    # chụp lại giá trị sau khi gọi hàm
+    ret=$?
+    echo " Value is $ret"
+
+Output : 
+
+    $./test.sh
+    Hello World
+    Value is 10
+
+## Nested Functions ##
+
+    #!/bin/sh
+
+    # Calling one function from another
+    number_one () {
+    echo "This is the first function speaking..."
+    number_two
+    }
+
+    number_two () {
+    echo "This is now the second function speaking..."
+    }
+
+    # Calling function one.
+    number_one
+
+output:
+
+    ./test.sh
+    This is the first function speaking...
+    This is now the second function speaking...
+
+note : bạn có thể viết nó trong .profile và khi login vào có thể cùng các Func mà bạn đã tạo 
+   
+</details>
+
+</details>
 
 
