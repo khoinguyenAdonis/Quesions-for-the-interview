@@ -1693,4 +1693,148 @@ note : bạn có thể viết nó trong .profile và khi login vào có thể c�
 
 </details>
 
+<details>
+<summary><h2>Các chủ đề và câu hỏi ôn tập Lập trình hướng đối tượng C++<h2></summary>
+Chủ đề 1: Tổng quan và Khái niệm cơ bản
+<details>
+<summary><h3>Câu hỏi 1: Lập trình hướng đối tượng (OOP) là gì? Tại sao chúng ta lại cần sử dụng OOP?<h3></summary>
 
+    - OOP là 1 cách tiếp cận với việc lập trình tập trung vào việc tổ chức phần mềm xung quanh các đối tượng. Thay vì tập trung xử lý các logic tuần tự. Trong OOP dữ liệu và các thao tác trên dữ liệu được được nhóm lại thành 1 thực thể gọi là đối tượng. 
+    
+    - Khi sử dungj OOP thì sẽ có lợi ích :
+        Dễ dàng và mang tính đối tượng trong việc phát phần mềm : Thay vì suy nghĩ theo các bước tuần tự thì OOP khuyến khích lập trinh theo mô hình hóa các thực thể trong thế giới đó đều này giúp gần gủi và dễ hiểu hơn trong cách chúng ta tư duy về vấn đề. 
+
+        Dễ Bảo trì vầ nâng cấp: 
+
+        Bảo trì : khi có các thay đổi thường sẽ được khoanh vùng trong các đối tượng cụ thể điều này sẽ dễ dàng hơn trong việc bảo trì.
+
+        Nâng cấp : với các tính năng như kế thừa hay đa hình thì việc nâng cấp sẽ dễ dàng hơn. 
+    
+        Đóng gói dữ liệu : Giúp bảo vệ dữ liệu bên trong đối tượng khỏi sự truy cập bên ngoài không mong muốn
+
+        Đơn giản hóa việc quản lý tài nguyên: nó cho phép trù tượng hóa các vấn đề phức tạp tập trung vào những gì đối tượng làm chứ không phải cách nó làm như nào. 
+
+        Tái sử dụng mã: OOP cho phép tạo ra các class có thể tái sử dụng tròg các thành phần khác nhau của 1 dự án tạo tính nhất quán trong việc phát triễn phần mềm. 
+
+</details>
+<details>
+<summary><h3>Câu hỏi 2: Nêu và giải thích tóm tắt 4 trụ cột cơ bản của OOP (hoặc 3 trụ cột chính nếu bạn biết).<h3></summary>
+
+</details>
+<details>
+<summary><h3>Câu hỏi 3: Phân biệt giữa Class (Lớp) và Object (Đối tượng) trong C++. Cho ví dụ minh họa.<h3></summary>
+
+- class : là 1 cấu trúc được người dùng khai báo định nghĩa dùng để mô tả các thuộc tính và phương thức của 1 đối tượng, Class sẽ không tốn vùng nhớ trên ram . class không chứa dữ liệu củ thể mà chỉ chứa kiểu dữ liệu. 
+
+Ví dụ : ta có 1 class về con người mang các thuộc tính chiều cao cân nặng, hay phương thức cách hoạt động. 
+
+- Object : là 1 đối tượng được khai báo từ class và nó sẽ chíêm vùng nhớ cụ thể trên ram. Mỗi OBject độc lập với các obj khác được tạo cùng 1 class.
+
+ví dụ : 1 nhân vật cụ thể được tạo từ class con người sẽ có các thông số chiều cao cụ thể ... 
+
+</details>
+<details>
+<summary><h3>Câu hỏi 4: Constructor và Destructor trong C++ là gì? Khi nào chúng được gọi? Có những loại Constructor nào?<h3></summary>
+
+- constructor : là 1 phương thức để khai báo cài đặt giá trị ban đầu của 1 object, Nó được gọi khi khai báo 1 objet từ 1 class. 
+
+Có các loại constructor
+
+    Default constructor , Parameter constructor, copy constructor, move constructor.
+
+- Destructor : là 1 phương thức giải phóng các tài nguyên mà vòng đời của 1 object nắm giữ trước khi nó bị hủy. Nó được tự động gọi khi 1 object không còn cần thiết nước tức là chuẩn bị bị hủy hoặc giải phóng  ví dụ như kết thúc 1 function trong có có tạo 1 object, Giải phóng cấp phát 
+</details>
+Chủ đề 2: Đóng gói (Encapsulation)
+<details>
+<summary><h3>Câu hỏi 5: Đóng gói là gì? Nó mang lại lợi ích gì cho việc phát triển phần mềm?<h3></summary>
+
+- Đóng gói là nguyên tắc kết hợp dữ liệu và các phương thức thao tác dữ liệu trong cùng 1 class duy nhất. Nó kiểm soát quyền truy cập của các thành phần bên trong class. Ẩn đi các chi tiết bên trong của 1 class khỏi bên ngoài  
+
+- Lợi ích : 
+    
+    Bảo vệ tính toàn vẹn của dữ liệu bằng cách giới hạn quyền truy cập trực tiếp vào dữ liệu. ngăn chặn việc thay đổi dữ liệu không mong muốn từ bên ngoài 
+
+    Giảm sự phụ thuộc: các thành phần bên ngoài class không cần biết chi tiết về cách lưu trữ hoặc xử lý dữ liệu mà chỉ cần dùng thông qua giao diện cung cấp từ class. 
+
+    Dễ nâng cấp và mở rộng: Vì được ẩn đi nên việc bảo trì sẽ đơn giản hơn mà k sợ bị phá hủy các cấu trúc khác, Có thể thêm các phương thức mới mà không thay đổi cấu trúc dữ liệu.
+
+    Sự rỏ ràng và dễ hiểu : ng dùng chỉ cần quan tâm những gì nó làm mà k cần quan tâm nó làm như thế nào do các dữ liệu và method liên quan được nhóm vào cùng 1 class.
+
+</details>
+
+<details>
+<summary><h3>Câu hỏi 6: Giải thích các từ khóa kiểm soát truy cập (public, private, protected) trong C++. Cho ví dụ về cách sử dụng chúng.<h3></summary>
+
+Public : 1 chir thị rong class cho phép đối tượng trực tiếp thao tác gọi chúng, 
+
+Private : là chỉ thị các thuộc tính trong privite chỉ có thể thao tác thông qua các phương thức tại public. Khi dùng kế thừa thì thành phần này sẽ k thể thao tác tại class con nhưng vẫn được kế thừa và muốn thao tác nó thì vẫn phải thông qua method tại lớp cha kế thừa cho con. 
+
+protected : giống với private nhưng sẽ có điểm khác tại quá trình kế thừa là protected có thể thao tác thông qua phương thức của lớp con. 
+
+</details>
+Câu hỏi 7: Getter và Setter là gì? Tại sao chúng ta thường sử dụng chúng thay vì truy cập trực tiếp các thuộc tính của đối tượng?
+Chủ đề 3: Kế thừa (Inheritance)
+
+<details>
+<summary><h3>Câu hỏi 8: Kế thừa là gì? Nó giúp ích gì trong OOP?<h3></summary>
+
+Kế thừa cho phép lớp con có thể kế thừa các thuộc tính của lớp cha cả cấu trúc dữ liệu và phương thức. 
+
+- Lợi ích của việc kế thừa là tái sử dụng mã, 
+
+- Giảm trùng lập bằng cách tập trung các tính năng chung chung vào 1 lớp cha thay vì viết nhiều mã tương tự nhau.
+
+- Dễ thay đổi logic khi chỉ cần thay đổi ở lớp cha. 
+
+- Hổ trợ cho tính năng đa hình. 
+
+- Dễ mở rộng mã thêm đối tượng mới bằng cách kế thừa các đối tượng củ.
+
+</details>
+<details>
+<summary><h3>Câu hỏi 10: Khi kế thừa, thứ tự gọi constructor và destructor giữa lớp cha và lớp con diễn ra như thế nào?<h3></summay>
+
+- Khi kết thừa thứ tự của constructor sẽ được gọi từ lớp cha đầu tiên xuống lớp con cuối cung.
+
+Lý do: Lớp con phụ thuộc vào lớp cha. Để một đối tượng lớp con có thể tồn tại và hoạt động đúng, phần "lớp cha" của nó phải được khởi tạo trước. Các thành viên của lớp cha cần được thiết lập trước khi lớp con có thể thêm vào hoặc sử dụng chúng.
+
+- Destructor sẽ ngược lại được giải phóng ở lớp con trước và cuối cùng lớp cha
+
+Lý do: Lớp con có thể đã sử dụng hoặc quản lý các tài nguyên mà lớp cha không biết hoặc không kiểm soát. Để tránh rò rỉ tài nguyên hoặc lỗi, các tài nguyên đặc trưng của lớp con phải được giải phóng trước khi phần lớp cha của đối tượng bị hủy. Nếu lớp cha bị hủy trước, các tài nguyên của lớp con có thể trở thành "treo" (dangling) hoặc không thể truy cập để giải phóng.
+
+Nên dùng virtual với destructor lớp cha để đảm bảo lớp cha được giải phóng đúng trong trường hợp cấp phát 1 đối tượng lớp con bằng con trỏ lớp cha khi giải phóng thì chỉ có destructor của lớp con được gọi
+</details>
+
+
+<details>
+<summary><h3> Tru tượng là gì <h3></summary>
+
+- Nó tập trung vào việc hiển thị thông tin cần thiết ẩn đi các chi tiết triển khai phức tạo không quan trọng đối với ng dùng và hệ thống. 
+
+- Mục địch
+
+    Đơn giản hóa làm cho hệ thống phức tạp trở nên dễ hiểu hơn. 
+
+    Tăng tính dễ đọc và baor trì hệ thống. 
+
+    Tăng tính linh hoạt và khả năng mở rộng. 
+
+    Che dấu thông tin: bảo vệ dữ liệu logic bên trong khỏi sự truy cập hoặc thay đổi không mong muốn. 
+</details>
+Câu hỏi 11: Phân biệt giữa is-a relationship và has-a relationship. Khi nào thì nên dùng kế thừa, khi nào nên dùng Composition (quan hệ "có một")?
+Chủ đề 4: Đa hình (Polymorphism)
+
+Câu hỏi 12: Đa hình là gì? Nêu và giải thích các loại đa hình chính trong C++.
+Câu hỏi 13: Giải thích chi tiết về nạp chồng hàm (Function Overloading).
+Câu hỏi 14: Giải thích chi tiết về ghi đè hàm (Function Overriding). Nêu các điều kiện cần để thực hiện ghi đè hàm.
+Câu hỏi 15: virtual function là gì và tại sao nó lại quan trọng đối với tính đa hình động? pure virtual function là gì?
+Câu hỏi 16: Abstract Class là gì? Khi nào một lớp trở thành Abstract Class? Có thể tạo đối tượng từ Abstract Class không?
+Câu hỏi 17: Phân biệt giữa virtual function và pure virtual function.
+Câu hỏi 18: virtual destructor là gì và tại sao lại cần sử dụng nó khi làm việc với đa hình?
+Câu hỏi 19: Operator Overloading (Nạp chồng toán tử) là gì? Cho một ví dụ về nạp chồng toán tử + cho một lớp tùy chỉnh.
+Chủ đề 5: Các khái niệm nâng cao và Phụ trợ
+
+Câu hỏi 20: Friend function và Friend class là gì? Khi nào chúng ta nên sử dụng chúng? Lợi ích và hạn chế?
+Câu hỏi 21: Static member variable và Static member function là gì? Chúng khác gì so với các thành viên thông thường của lớp?
+Câu hỏi 22: Giải thích về const trong ngữ cảnh của lập trình hướng đối tượng (const object, const member function, const parameter).
+</details>
