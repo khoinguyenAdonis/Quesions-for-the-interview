@@ -1821,14 +1821,67 @@ Nên dùng virtual với destructor lớp cha để đảm bảo lớp cha đư�
 
     Che dấu thông tin: bảo vệ dữ liệu logic bên trong khỏi sự truy cập hoặc thay đổi không mong muốn. 
 </details>
-Câu hỏi 11: Phân biệt giữa is-a relationship và has-a relationship. Khi nào thì nên dùng kế thừa, khi nào nên dùng Composition (quan hệ "có một")?
 Chủ đề 4: Đa hình (Polymorphism)
 
-Câu hỏi 12: Đa hình là gì? Nêu và giải thích các loại đa hình chính trong C++.
+<details>
+<summary><h3>Câu hỏi 12: Đa hình là gì? Nêu và giải thích các loại đa hình chính trong C++.<h3></summary>
+
+đa hình là 1 trong 4 đặc trưng của OOP đa hình cho phép 1 đối tượng biểu diễn thoe nhiều thuộc tính khác nhau. 
+
+có 2 loại 
+
+đa hình compiler time (đa hình tại thời điểm biên dịch) : là quyết định cách thức hoạt động của đối tượng tại thời điểm biên dịch 
+
+Ví dụ 1 đối tượng có thể có cùng tên 1 chức năng nhưng cách thức hoạt động nó khác nhau khi ta truyền tham số khác nhau
+```c++
+class MyMath {
+public:
+    // Phương thức cộng hai số nguyên
+    int add(int a, int b) {
+        std::cout << "Calling add(int, int)" << std::endl;
+        return a + b;
+    }
+
+    // Phương thức cộng ba số nguyên (khác về số lượng tham số)
+    int add(int a, int b, int c) {
+        std::cout << "Calling add(int, int, int)" << std::endl;
+        return a + b + c;
+    }
+
+    // Phương thức cộng hai số double (khác về kiểu dữ liệu tham số)
+    double add(double a, double b) {
+        std::cout << "Calling add(double, double)" << std::endl;
+        return a + b;
+    }
+};
+```
+
+Đa hình runtime( đa hình trong quá trình hoạt động) : quyết định trong tại thời điểm chạy thông qua kế thừa, hoặc hàm ảo (virtual function)
+
+</details>
 Câu hỏi 13: Giải thích chi tiết về nạp chồng hàm (Function Overloading).
 Câu hỏi 14: Giải thích chi tiết về ghi đè hàm (Function Overriding). Nêu các điều kiện cần để thực hiện ghi đè hàm.
-Câu hỏi 15: virtual function là gì và tại sao nó lại quan trọng đối với tính đa hình động? pure virtual function là gì?
-Câu hỏi 16: Abstract Class là gì? Khi nào một lớp trở thành Abstract Class? Có thể tạo đối tượng từ Abstract Class không?
+<details>
+<summary><h3>Câu hỏi 15: virtual function là gì và tại sao nó lại quan trọng đối với tính đa hình động? pure virtual function là gì?<h3></summary>
+
+- là 1 thành viên qung trọng trong class base  được khai báo với từ khóa virtual, Mục đích là cho phép đa hình tại thời điểm chạy. 
+
+- điều này có thể hình dung khi mà không có hàm ảo khi dùng con trỏ hoặc tham chiếu của lớp cơ sở nhưng nó lại trỏ đến lớp dẫn xuất nếu gọi 1 method mà không phải virtual thì nó sẽ mặc định gọi ở base class. Ngược lại khi dùng hàm ảo gọi hàm bằng tham chiếu của lớp cha đi thì nó sẽ nhìn vào kiểu thực tế của đối tượng nó trỏ đến. 
+
+</details>
+<details>
+<summary><h3>Câu hỏi 16: Abstract Class là gì? Khi nào một lớp trở thành Abstract Class? Có thể tạo đối tượng từ Abstract Class không?<h3></summary>
+
+Abstract Class (Lớp trừu tượng) là một lớp được thiết kế để chỉ đóng vai trò là lớp cơ sở (base class) cho các lớp khác kế thừa. Nó không được dùng để tạo các đối tượng trực tiếp. Lớp trừu tượng thường chứa ít nhất một hàm thuần ảo (pure virtual function).
+
+Mục đích chính của một lớp trừu tượng là để:
+
+Định nghĩa một giao diện chung (interface) cho một nhóm các lớp có liên quan.
+Cung cấp các triển khai mặc định cho một số chức năng (nếu có) nhưng buộc các lớp con phải triển khai các chức năng khác (các hàm thuần ảo).
+Đảm bảo rằng các lớp con sẽ có những hành vi nhất định, mà không cần biết cách cụ thể hành vi đó được triển khai.
+Khi nào một lớp trở thành Abstract Class?
+Một lớp trở thành Abstract Class khi nó chứa ít nhất một hàm thuần ảo (pure virtual function).
+</details>
 Câu hỏi 17: Phân biệt giữa virtual function và pure virtual function.
 Câu hỏi 18: virtual destructor là gì và tại sao lại cần sử dụng nó khi làm việc với đa hình?
 Câu hỏi 19: Operator Overloading (Nạp chồng toán tử) là gì? Cho một ví dụ về nạp chồng toán tử + cho một lớp tùy chỉnh.
