@@ -1792,7 +1792,7 @@ Kế thừa cho phép lớp con có thể kế thừa các thuộc tính của l
 
 </details>
 <details>
-<summary><h3>Câu hỏi 10: Khi kế thừa, thứ tự gọi constructor và destructor giữa lớp cha và lớp con diễn ra như thế nào?<h3></summay>
+<summary><h3>Câu hỏi 10: Khi kế thừa, thứ tự gọi constructor và destructor giữa lớp cha và lớp con diễn ra như thế nào?<h3></summary>
 
 - Khi kết thừa thứ tự của constructor sẽ được gọi từ lớp cha đầu tiên xuống lớp con cuối cung.
 
