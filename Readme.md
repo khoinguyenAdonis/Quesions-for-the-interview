@@ -1719,7 +1719,13 @@ Chủ đề 1: Tổng quan và Khái niệm cơ bản
 </details>
 <details>
 <summary><h3>Câu hỏi 2: Nêu và giải thích tóm tắt 4 trụ cột cơ bản của OOP (hoặc 3 trụ cột chính nếu bạn biết).<h3></summary>
+- Tính trù tượng : ẩn đi các chi tiết phức tạp của 1 đối tượng và chỉ thể hiện những thông tin quan trọng cho người dùng. Lợi ích là đơn giản hóa mã dễ hiểu hơn giúp tập trung vào cái gì chứ k phải là như thế nào 
 
+- Tính đóng gói: Góm các thành phần dữ liệu thuộc tính thao tác trên dữ liệu vào cùng 1 góp (class/ lớp ). Đồng thời nó cũng là kiểm soát quyền truy cập của các thành phần đó qua (pravite, public, protected). Lợi ích bảo vệ tính toàn vẹn dữ liệu, ngăn chặn sửa đổi truy cập từ bên ngoài. 
+
+- Kế thừa : Là cho phép 1 lớp mới Gọi là lớp con hay lớp dẫn xuất. thừa hưởng các thuộc tính hay phương thức của lớp đã tồn tại hay lớp cha lớp cơ sở. Giúp tải sử dụng mã, lợi ích tái sử dụng mã, dễ mở rộng thiếp lập phân cấp với các lớp cha. 
+
+- Đa hình : Cho phép các đối tượng thuộc các lớp khác nhau nhưng có cùng lớp cơ sở được xử lý thông qua 1 giao diện chung và chúng sẽ thực hiện cùng 1 phương thức nhưng hành vi sẽ khác nhau phụ thuộc vào lớp dẫn xuất. Lợi ích thì nó linh hoạt có thể làm việc với nhiều lớp khác nhau thông qua 1 giao diện chung. dễ mở roọng 
 </details>
 <details>
 <summary><h3>Câu hỏi 3: Phân biệt giữa Class (Lớp) và Object (Đối tượng) trong C++. Cho ví dụ minh họa.<h3></summary>
@@ -1868,6 +1874,8 @@ Câu hỏi 14: Giải thích chi tiết về ghi đè hàm (Function Overriding)
 
 - điều này có thể hình dung khi mà không có hàm ảo khi dùng con trỏ hoặc tham chiếu của lớp cơ sở nhưng nó lại trỏ đến lớp dẫn xuất nếu gọi 1 method mà không phải virtual thì nó sẽ mặc định gọi ở base class. Ngược lại khi dùng hàm ảo gọi hàm bằng tham chiếu của lớp cha đi thì nó sẽ nhìn vào kiểu thực tế của đối tượng nó trỏ đến. 
 
+- Hàm thuần ảo () : được dùng để tạo ra cac lớp trù tượng nó chỉ khai báo và không được triễn khai. nó yêu cầu các lớp con buộc phải định nghĩa hàm đó. 
+
 </details>
 <details>
 <summary><h3>Câu hỏi 16: Abstract Class là gì? Khi nào một lớp trở thành Abstract Class? Có thể tạo đối tượng từ Abstract Class không?<h3></summary>
@@ -1888,6 +1896,83 @@ Câu hỏi 19: Operator Overloading (Nạp chồng toán tử) là gì? Cho mộ
 Chủ đề 5: Các khái niệm nâng cao và Phụ trợ
 
 Câu hỏi 20: Friend function và Friend class là gì? Khi nào chúng ta nên sử dụng chúng? Lợi ích và hạn chế?
-Câu hỏi 21: Static member variable và Static member function là gì? Chúng khác gì so với các thành viên thông thường của lớp?
+<details>
+<summary><h3>
+Câu hỏi 21: Static member variable và Static member function là gì? Chúng khác gì so với các thành viên thông thường của lớp?<h3></summary>
+Static member : là biến dùng chung cho tất cả các đối tượng của 1 lớp. Chỉ có 1 bản duy nhất và tồn tại trong bộ nhớ. 
+
+Static function : là hàm của 1 lớp không cần đối tượng để gọi. chỉ có thể truy cập các biến static hoặc các hàm static khác. 
+
+Tính chất	Thành viên thông thường	Thành viên static
+Gắn với đối tượng	Có	Không (gắn với lớp)
+Số lượng bản sao	Mỗi đối tượng 1 bản sao	Duy nhất 1 bản trong toàn bộ chương trình
+Truy cập từ tên lớp	Không	Có thể
+Sử dụng con trỏ this	Có	Không
+Khả năng gọi khi chưa có đối tượng	Không	Có thể gọi trực tiếp
+</details>
 Câu hỏi 22: Giải thích về const trong ngữ cảnh của lập trình hướng đối tượng (const object, const member function, const parameter).
+
+<details>
+<summary> Khi nào dùng auto </summary>
+
+- Khi 1 kiểu dữ lieeuj phức tạp dài dòng, dùng với các hàm lamda vì kiểu của lamda là kiểu ẩn danh do trình biên dịch tạo ra. Vòng lập phạm vi range-based for loop, nếu biểu thức đã khởi tạo đã rõ ràng thì việc dùng auto giúp mã tinh gọn hơn. 
+
+- không nên dùng khi : KHi 1 biễu thức khong rõ ràng ngay lập tức gây khó hiểu khi đọc.  Tránh chuyển đổi ngầm k mong muốn vd auto r = 5/2 => int 
+
+</details>
+
+<details>
+<summary> Vì sao null ptr tốt hơn </summary>
+
+
+Loại bỏ sự mơ hồ trong việc nạp chồng hàm.
+
+
+Cung cấp tính an toàn kiểu cao hơn, ngăn ngừa các lỗi không mong muốn.
+
+
+Làm cho mã nguồn rõ ràng và dễ đọc hơn. 
+
+</details>
+
+<details>
+<summary> Range base for loop </summary>
+
+về cơ bản nó sẽ hoạt động bất kỳ đối tượng nào có khái niệm phạm vi cụ thể như : các container của STL, mảng c cố định đã biết trước kích thước tại thời điểm biên dịch. với các đối tượng có begin hoặc end về mặt kỹ thuật thì nó được thành vòng for truyền thống sử dụng iterator chuổi ký tự trong c++ cũng hoạt động như 1 container. 
+
+</details>
+<details>
+<summary> Lamda vs function pointer </summary>
+
+function pointer : nó chỉ là 1 biến con trỏ địa chier của 1 hàm có kiểu dữ liệu cụ thể và rỏ ràng không thể nhớ trạng thái từ môi trường xung quanh nó gọi.
+
+
+Lambda : là 1 hàm nặc danh tạo ra ngay tại thời điểm được gọi, nó có kiểu dữ liệu ẩn danh do compiler tạo ra và không viết 1 cách tường minh. Nó có thể được chuyển đổi thành 1 function pointer nến như không capture hay có các biến trạng thái bên trong nó. ĐIểm mạnh nhứ khác biệt nhất là nó có thể bắt được các biến xung quanh môi trường nó được khởi tạo. biến, tham chiếu hoặc tất cả các biến theo giá trị hoặc tham chiếu tự động . c++ 14 thì có thể khai báo cả biến trong list nó luôn bao gôm luôn duy chuyển đối tượng không thể coppy. 
+
+</details>
+
+</details>
+<details>
+<summary> Overide và overload </summary>
+
+overide : xảy ra khi 1 lớp con, cupn cấp 1 triễn khai 1 method mà lớp cha đã khai báo, và phương thức đó phải là virtual trình biên dịch sẽ quyết định phương thức nào được gọi tại thời điểm chạy đây là 1 dạng của đa hình động cho phép thay đổi hành vi phù hợp với đặc điểm của lớp con. 
+
+
+overload : xảy ra khi mà trong cung 1 phạm vi có các hàm cùng tên nhưng khác tham số truyền vào trình biên dịch sẽ quyết định phước thức hoạt động tại lúc compiler đây là đa hình tại tĩnh cho phép hàm đó thể hiện đúng với hành vi mà ta mong muốn. 
+
+</details>
+</details>
+<details>
+<summary> Smart Pointer</summary>
+
+là 1 class templet của c++ 11 trở lên nó hoạt động như 1 con trỏ raw thông thường nhưng có thêm khả năng tự động quản lý vòng đời của 1 bộ nhớ head, đây là mục đich tối cao mà nó được tạo ra ngăn chặn rò rĩ (leak) memory và các lỗi liên quan đến quản lý thủ công Như giải phóng 2 lần, daling pointer exception xảy ra ngay khi giải phóng delete memory thì thì delete sẽ không được thực hiện 
+
+- Unique pointer : là sở hữu đọc quyền duy nhất không coppy chỉ có thể chuyển đến 1 con unique khác. gần như không có chi phí bổ sung như raw pointer. 
+
+- Shared pointer : nhiều shared có thể cung quản lý 1 đối tượng , nó dùng referent count để đếm số lượng con trỏ pointer trỏ đến. khi referent count = 0 sẽ giải phóng đối tượng 
+
+- Weak pointer : nó sẽ không sở hữu đối tượng mà nó trỏ đến không tăng bộ đến tham chiếu mục đích của nó là phá vỡ vòng lập tham chiếu mà sharedb pointer tạo ra. muốn truy cập thì phải chuyển quyền weak thành shared pointer bằng lock 
+
+</details>
+
 </details>
