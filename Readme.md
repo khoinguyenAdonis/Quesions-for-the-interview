@@ -1697,7 +1697,7 @@ note : bạn có thể viết nó trong .profile và khi login vào có thể c�
 <summary><h2>Các chủ đề và câu hỏi ôn tập Lập trình hướng đối tượng C++<h2></summary>
 Chủ đề 1: Tổng quan và Khái niệm cơ bản
 <details>
-<summary><h3>Câu hỏi 1: Lập trình hướng đối tượng (OOP) là gì? Tại sao chúng ta lại cần sử dụng OOP?<h3></summary>
+<summary><h3>⏩ Câu hỏi 1: Lập trình hướng đối tượng (OOP) là gì? Tại sao chúng ta lại cần sử dụng OOP?<h3></summary>
 
     - OOP là 1 cách tiếp cận với việc lập trình tập trung vào việc tổ chức phần mềm xung quanh các đối tượng. Thay vì tập trung xử lý các logic tuần tự. Trong OOP dữ liệu và các thao tác trên dữ liệu được được nhóm lại thành 1 thực thể gọi là đối tượng. 
     
@@ -1718,7 +1718,7 @@ Chủ đề 1: Tổng quan và Khái niệm cơ bản
 
 </details>
 <details>
-<summary><h3>Câu hỏi 2: Nêu và giải thích tóm tắt 4 trụ cột cơ bản của OOP (hoặc 3 trụ cột chính nếu bạn biết).<h3></summary>
+<summary><h3>⏩ Câu hỏi 2: Nêu và giải thích tóm tắt 4 trụ cột cơ bản của OOP (hoặc 3 trụ cột chính nếu bạn biết).<h3></summary>
 - Tính trù tượng : ẩn đi các chi tiết phức tạp của 1 đối tượng và chỉ thể hiện những thông tin quan trọng cho người dùng. Lợi ích là đơn giản hóa mã dễ hiểu hơn giúp tập trung vào cái gì chứ k phải là như thế nào 
 
 - Tính đóng gói: Góm các thành phần dữ liệu thuộc tính thao tác trên dữ liệu vào cùng 1 góp (class/ lớp ). Đồng thời nó cũng là kiểm soát quyền truy cập của các thành phần đó qua (pravite, public, protected). Lợi ích bảo vệ tính toàn vẹn dữ liệu, ngăn chặn sửa đổi truy cập từ bên ngoài. 
@@ -1728,7 +1728,7 @@ Chủ đề 1: Tổng quan và Khái niệm cơ bản
 - Đa hình : Cho phép các đối tượng thuộc các lớp khác nhau nhưng có cùng lớp cơ sở được xử lý thông qua 1 giao diện chung và chúng sẽ thực hiện cùng 1 phương thức nhưng hành vi sẽ khác nhau phụ thuộc vào lớp dẫn xuất. Lợi ích thì nó linh hoạt có thể làm việc với nhiều lớp khác nhau thông qua 1 giao diện chung. dễ mở roọng 
 </details>
 <details>
-<summary><h3>Câu hỏi 3: Phân biệt giữa Class (Lớp) và Object (Đối tượng) trong C++. Cho ví dụ minh họa.<h3></summary>
+<summary><h3>⏩ Câu hỏi 3: Phân biệt giữa Class (Lớp) và Object (Đối tượng) trong C++. Cho ví dụ minh họa.<h3></summary>
 
 - class : là 1 cấu trúc được người dùng khai báo định nghĩa dùng để mô tả các thuộc tính và phương thức của 1 đối tượng, Class sẽ không tốn vùng nhớ trên ram . class không chứa dữ liệu củ thể mà chỉ chứa kiểu dữ liệu. 
 
@@ -1740,7 +1740,7 @@ ví dụ : 1 nhân vật cụ thể được tạo từ class con người sẽ 
 
 </details>
 <details>
-<summary><h3>Câu hỏi 4: Constructor và Destructor trong C++ là gì? Khi nào chúng được gọi? Có những loại Constructor nào?<h3></summary>
+<summary><h3>⏩ Câu hỏi 4: Constructor và Destructor trong C++ là gì? Khi nào chúng được gọi? Có những loại Constructor nào?<h3></summary>
 
 - constructor : là 1 phương thức để khai báo cài đặt giá trị ban đầu của 1 object, Nó được gọi khi khai báo 1 objet từ 1 class. 
 
@@ -1752,7 +1752,7 @@ Có các loại constructor
 </details>
 Chủ đề 2: Đóng gói (Encapsulation)
 <details>
-<summary><h3>Câu hỏi 5: Đóng gói là gì? Nó mang lại lợi ích gì cho việc phát triển phần mềm?<h3></summary>
+<summary><h3>⏩ Câu hỏi 5: Đóng gói là gì? Nó mang lại lợi ích gì cho việc phát triển phần mềm?<h3></summary>
 
 - Đóng gói là nguyên tắc kết hợp dữ liệu và các phương thức thao tác dữ liệu trong cùng 1 class duy nhất. Nó kiểm soát quyền truy cập của các thành phần bên trong class. Ẩn đi các chi tiết bên trong của 1 class khỏi bên ngoài  
 
@@ -1769,7 +1769,7 @@ Chủ đề 2: Đóng gói (Encapsulation)
 </details>
 
 <details>
-<summary><h3>Câu hỏi 6: Giải thích các từ khóa kiểm soát truy cập (public, private, protected) trong C++. Cho ví dụ về cách sử dụng chúng.<h3></summary>
+<summary><h3>⏩ Câu hỏi 6: Giải thích các từ khóa kiểm soát truy cập (public, private, protected) trong C++. Cho ví dụ về cách sử dụng chúng.<h3></summary>
 
 Public : 1 chir thị rong class cho phép đối tượng trực tiếp thao tác gọi chúng, 
 
@@ -1782,7 +1782,7 @@ Câu hỏi 7: Getter và Setter là gì? Tại sao chúng ta thường sử dụ
 Chủ đề 3: Kế thừa (Inheritance)
 
 <details>
-<summary><h3>Câu hỏi 8: Kế thừa là gì? Nó giúp ích gì trong OOP?<h3></summary>
+<summary><h3>⏩ Câu hỏi 8: Kế thừa là gì? Nó giúp ích gì trong OOP?<h3></summary>
 
 Kế thừa cho phép lớp con có thể kế thừa các thuộc tính của lớp cha cả cấu trúc dữ liệu và phương thức. 
 
@@ -1798,7 +1798,7 @@ Kế thừa cho phép lớp con có thể kế thừa các thuộc tính của l
 
 </details>
 <details>
-<summary><h3>Câu hỏi 10: Khi kế thừa, thứ tự gọi constructor và destructor giữa lớp cha và lớp con diễn ra như thế nào?<h3></summary>
+<summary><h3>⏩ Câu hỏi 10: Khi kế thừa, thứ tự gọi constructor và destructor giữa lớp cha và lớp con diễn ra như thế nào?<h3></summary>
 
 - Khi kết thừa thứ tự của constructor sẽ được gọi từ lớp cha đầu tiên xuống lớp con cuối cung.
 
@@ -1813,7 +1813,7 @@ Nên dùng virtual với destructor lớp cha để đảm bảo lớp cha đư�
 
 
 <details>
-<summary><h3> Tru tượng là gì <h3></summary>
+<summary><h3>⏩ Tru tượng là gì <h3></summary>
 
 - Nó tập trung vào việc hiển thị thông tin cần thiết ẩn đi các chi tiết triển khai phức tạo không quan trọng đối với ng dùng và hệ thống. 
 
@@ -1830,7 +1830,7 @@ Nên dùng virtual với destructor lớp cha để đảm bảo lớp cha đư�
 Chủ đề 4: Đa hình (Polymorphism)
 
 <details>
-<summary><h3>Câu hỏi 12: Đa hình là gì? Nêu và giải thích các loại đa hình chính trong C++.<h3></summary>
+<summary><h3>⏩ Câu hỏi 12: Đa hình là gì? Nêu và giải thích các loại đa hình chính trong C++.<h3></summary>
 
 đa hình là 1 trong 4 đặc trưng của OOP đa hình cho phép 1 đối tượng biểu diễn thoe nhiều thuộc tính khác nhau. 
 
@@ -1868,7 +1868,7 @@ public:
 Câu hỏi 13: Giải thích chi tiết về nạp chồng hàm (Function Overloading).
 Câu hỏi 14: Giải thích chi tiết về ghi đè hàm (Function Overriding). Nêu các điều kiện cần để thực hiện ghi đè hàm.
 <details>
-<summary><h3>Câu hỏi 15: virtual function là gì và tại sao nó lại quan trọng đối với tính đa hình động? pure virtual function là gì?<h3></summary>
+<summary><h3>⏩ Câu hỏi 15: virtual function là gì và tại sao nó lại quan trọng đối với tính đa hình động? pure virtual function là gì?<h3></summary>
 
 - là 1 thành viên qung trọng trong class base  được khai báo với từ khóa virtual, Mục đích là cho phép đa hình tại thời điểm chạy. 
 
@@ -1878,7 +1878,7 @@ Câu hỏi 14: Giải thích chi tiết về ghi đè hàm (Function Overriding)
 
 </details>
 <details>
-<summary><h3>Câu hỏi 16: Abstract Class là gì? Khi nào một lớp trở thành Abstract Class? Có thể tạo đối tượng từ Abstract Class không?<h3></summary>
+<summary><h3>⏩ Câu hỏi 16: Abstract Class là gì? Khi nào một lớp trở thành Abstract Class? Có thể tạo đối tượng từ Abstract Class không?<h3></summary>
 
 Abstract Class (Lớp trừu tượng) là một lớp được thiết kế để chỉ đóng vai trò là lớp cơ sở (base class) cho các lớp khác kế thừa. Nó không được dùng để tạo các đối tượng trực tiếp. Lớp trừu tượng thường chứa ít nhất một hàm thuần ảo (pure virtual function).
 
@@ -1898,7 +1898,7 @@ Chủ đề 5: Các khái niệm nâng cao và Phụ trợ
 Câu hỏi 20: Friend function và Friend class là gì? Khi nào chúng ta nên sử dụng chúng? Lợi ích và hạn chế?
 <details>
 <summary><h3>
-Câu hỏi 21: Static member variable và Static member function là gì? Chúng khác gì so với các thành viên thông thường của lớp?<h3></summary>
+⏩ Câu hỏi 21: Static member variable và Static member function là gì? Chúng khác gì so với các thành viên thông thường của lớp?<h3></summary>
 Static member : là biến dùng chung cho tất cả các đối tượng của 1 lớp. Chỉ có 1 bản duy nhất và tồn tại trong bộ nhớ. 
 
 Static function : là hàm của 1 lớp không cần đối tượng để gọi. chỉ có thể truy cập các biến static hoặc các hàm static khác. 
@@ -1913,7 +1913,7 @@ Khả năng gọi khi chưa có đối tượng	Không	Có thể gọi trực ti
 Câu hỏi 22: Giải thích về const trong ngữ cảnh của lập trình hướng đối tượng (const object, const member function, const parameter).
 
 <details>
-<summary> Khi nào dùng auto </summary>
+<summary> ⏩ Khi nào dùng auto </summary>
 
 - Khi 1 kiểu dữ lieeuj phức tạp dài dòng, dùng với các hàm lamda vì kiểu của lamda là kiểu ẩn danh do trình biên dịch tạo ra. Vòng lập phạm vi range-based for loop, nếu biểu thức đã khởi tạo đã rõ ràng thì việc dùng auto giúp mã tinh gọn hơn. 
 
@@ -1922,7 +1922,7 @@ Câu hỏi 22: Giải thích về const trong ngữ cảnh của lập trình h�
 </details>
 
 <details>
-<summary> Vì sao null ptr tốt hơn </summary>
+<summary>⏩  Vì sao null ptr tốt hơn </summary>
 
 
 Loại bỏ sự mơ hồ trong việc nạp chồng hàm.
@@ -1936,13 +1936,13 @@ Làm cho mã nguồn rõ ràng và dễ đọc hơn.
 </details>
 
 <details>
-<summary> Range base for loop </summary>
+<summary>⏩  Range base for loop </summary>
 
 về cơ bản nó sẽ hoạt động bất kỳ đối tượng nào có khái niệm phạm vi cụ thể như : các container của STL, mảng c cố định đã biết trước kích thước tại thời điểm biên dịch. với các đối tượng có begin hoặc end về mặt kỹ thuật thì nó được thành vòng for truyền thống sử dụng iterator chuổi ký tự trong c++ cũng hoạt động như 1 container. 
 
 </details>
 <details>
-<summary> Lamda vs function pointer </summary>
+<summary>⏩  Lamda vs function pointer </summary>
 
 function pointer : nó chỉ là 1 biến con trỏ địa chier của 1 hàm có kiểu dữ liệu cụ thể và rỏ ràng không thể nhớ trạng thái từ môi trường xung quanh nó gọi.
 
@@ -1953,7 +1953,7 @@ Lambda : là 1 hàm nặc danh tạo ra ngay tại thời điểm được gọi
 
 </details>
 <details>
-<summary> Overide và overload </summary>
+<summary>⏩  Overide và overload </summary>
 
 overide : xảy ra khi 1 lớp con, cupn cấp 1 triễn khai 1 method mà lớp cha đã khai báo, và phương thức đó phải là virtual trình biên dịch sẽ quyết định phương thức nào được gọi tại thời điểm chạy đây là 1 dạng của đa hình động cho phép thay đổi hành vi phù hợp với đặc điểm của lớp con. 
 
@@ -1963,7 +1963,7 @@ overload : xảy ra khi mà trong cung 1 phạm vi có các hàm cùng tên như
 </details>
 </details>
 <details>
-<summary> Smart Pointer</summary>
+<summary>⏩  Smart Pointer</summary>
 
 là 1 class templet của c++ 11 trở lên nó hoạt động như 1 con trỏ raw thông thường nhưng có thêm khả năng tự động quản lý vòng đời của 1 bộ nhớ head, đây là mục đich tối cao mà nó được tạo ra ngăn chặn rò rĩ (leak) memory và các lỗi liên quan đến quản lý thủ công Như giải phóng 2 lần, daling pointer exception xảy ra ngay khi giải phóng delete memory thì thì delete sẽ không được thực hiện 
 
